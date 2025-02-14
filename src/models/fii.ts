@@ -4,13 +4,13 @@ export interface FiiData {
   dividendYield: number;
   segment?: string;
   yield: {
-    lastYield: {
+    lastYield?: {
       value: number;
       percentage: number;
       basePrice: number;
       date: Date;
     };
-    nextYield: {
+    nextYield?: {
       value: number;
       percentage: number;
       basePrice: number;

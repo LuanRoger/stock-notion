@@ -6,6 +6,8 @@ import {
   STATUS_INVEST_NOT_FOUND_PAGE_ELEMENT,
   STATUS_INVEST_NOT_FOUND_PAGE_TEXT,
 } from "@/services/status-invest/constants";
+import { parseDate } from "@/utils/date";
+import { parseNumber } from "@/utils/numbers";
 
 export async function getFiiById(id: string) {
   const page = await getFiiByIdStatusInvest(id);
@@ -16,7 +18,6 @@ export async function getFiiById(id: string) {
   const actualValue = page.querySelector(
     STATUS_INVEST_CLASS_SELECTORS.ACTUAL_VALUE
   )?.innerText;
-  console.log(actualValue);
   const dividendYield = page.querySelector(
     STATUS_INVEST_CLASS_SELECTORS.DIVIDEND_YIELD
   )?.innerText;
@@ -59,40 +60,44 @@ export async function getFiiById(id: string) {
     throw new FiiNotFound(id);
   }
 
-  if (
-    !name ||
-    !actualValue ||
-    !dividendYield ||
-    !lastYieldValue ||
-    !lastYieldPercentage ||
-    !lastYieldBasePrice ||
-    !lastYieldDate ||
-    !nextYieldValue ||
-    !nextYieldPercentage ||
-    !nextYieldBasePrice ||
-    !nextYieldDate
-  ) {
+  console.log(lastYieldValue);
+
+  if (!name || !actualValue || !dividendYield) {
     throw new FiiHasInvalidData(id);
   }
+  const doesHaveLastYieldData =
+    lastYieldValue &&
+    lastYieldPercentage &&
+    lastYieldBasePrice &&
+    lastYieldDate;
+  const doesHaveNextYieldData =
+    nextYieldValue &&
+    nextYieldPercentage &&
+    nextYieldBasePrice &&
+    nextYieldDate;
 
   const fiiData: FiiData = {
     name,
-    actualValue: parseFloat(actualValue),
-    dividendYield: parseFloat(dividendYield),
+    actualValue: parseNumber(actualValue),
+    dividendYield: parseNumber(dividendYield),
     segment,
     yield: {
-      lastYield: {
-        value: parseFloat(lastYieldValue),
-        percentage: parseFloat(lastYieldPercentage),
-        basePrice: parseFloat(lastYieldBasePrice),
-        date: new Date(lastYieldDate),
-      },
-      nextYield: {
-        value: parseFloat(nextYieldValue),
-        percentage: parseFloat(nextYieldPercentage),
-        basePrice: parseFloat(nextYieldBasePrice),
-        date: new Date(nextYieldDate),
-      },
+      lastYield: doesHaveLastYieldData
+        ? {
+            value: parseNumber(lastYieldValue),
+            percentage: parseNumber(lastYieldPercentage),
+            basePrice: parseNumber(lastYieldBasePrice),
+            date: parseDate(lastYieldDate),
+          }
+        : undefined,
+      nextYield: doesHaveNextYieldData
+        ? {
+            value: parseNumber(nextYieldValue),
+            percentage: parseNumber(nextYieldPercentage),
+            basePrice: parseNumber(nextYieldBasePrice),
+            date: parseDate(nextYieldDate),
+          }
+        : undefined,
     },
   };
 
