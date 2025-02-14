@@ -1,0 +1,1 @@
+export { getFiiById } from "./fiis";
