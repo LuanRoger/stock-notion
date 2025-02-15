@@ -10,20 +10,15 @@ routes.post(
   updateDatabasePagePropertiesValidator,
   async (c) => {
     const notionSecret = c.env.NOTION_INTEGRATION_SECRET;
+    if (!notionSecret) {
+      return c.status(500);
+    }
+
     const notionClient = createNotionClient(notionSecret);
     const databaseId = c.req.param("databaseId");
+    const body = c.req.valid("json");
 
-    await updateDatabasePageProperties(notionClient, databaseId, {
-      rowIdColumnName: "Nome do FII",
-      rowId: "ITIP11",
-      properties: [
-        {
-          name: "Quantidade de Cotas",
-          type: "number",
-          value: 10,
-        },
-      ],
-    });
+    await updateDatabasePageProperties(notionClient, databaseId, body);
 
     return c.status(201);
   }

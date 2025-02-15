@@ -1,6 +1,9 @@
-export interface PropertiesOptions {
+export interface PagePropertyIdentifier {
   rowIdColumnName: string;
   rowId: string;
+}
+
+export interface PropertiesOptions extends PagePropertyIdentifier {
   properties: PageProperty[];
 }
 
