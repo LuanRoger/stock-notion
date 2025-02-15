@@ -14,6 +14,7 @@ export async function updateDatabasePageProperties(
 ) {
   const database = await client.databases.query({ database_id: databaseId });
 
+  const updatePromises: Promise<void>[] = [];
   for (const page of database.results) {
     if (page.object !== "page") {
       continue;
@@ -31,6 +32,10 @@ export async function updateDatabasePageProperties(
       continue;
     }
 
-    await updatePageProperty(client, page.id, properties.properties[0]);
+    properties.properties.forEach((property) => {
+      updatePromises.push(updatePageProperty(client, page.id, property));
+    });
   }
+
+  return Promise.all(updatePromises);
 }
