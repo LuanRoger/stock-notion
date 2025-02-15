@@ -1,4 +1,8 @@
-import { updateDatabaseFiisPropertiesValidator } from "@/middlewares/validators";
+import { APP_RESPONSES } from "@/constants";
+import {
+  notionDatabaseIdValidator,
+  updateDatabaseFiisPropertiesValidator,
+} from "@/middlewares/validators";
 import { createNotionClient } from "@/modules/notion";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import { Hono } from "hono";
@@ -7,24 +11,27 @@ const routes = new Hono<{ Bindings: CloudflareBindings }>();
 
 routes.post(
   "/fiis/:databaseId",
+  notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesValidator,
   async (c) => {
     const notionSecret = c.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
-      return c.text("Secret not set", { status: 500 });
+      return c.text(APP_RESPONSES.SECRET_NOT_SET, { status: 500 });
     }
 
     const notionClient = createNotionClient(notionSecret);
     const databaseId = c.req.param("databaseId");
     const body = c.req.valid("json");
+    const { rowIdColumnName, databaseColumns } = body;
 
     await updateDatabaseFiisPageProperties(
       notionClient,
       databaseId,
-      body.rowIdColumnName
+      rowIdColumnName,
+      databaseColumns
     );
 
-    return c.text("OK", { status: 201 });
+    return c.text(APP_RESPONSES.OK, { status: 201 });
   }
 );
 

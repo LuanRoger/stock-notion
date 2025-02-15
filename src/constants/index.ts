@@ -14,3 +14,8 @@ export const DEFAULT_PAGE_PROPERTIES_NAME: PropertiesNameOption = {
   nextYieldBasePrice: "Próximo Rendimento Preço Base",
   nextYieldDate: "Próximo Rendimento Data",
 };
+
+export const APP_RESPONSES = {
+  SECRET_NOT_SET: "Secret not set",
+  OK: "OK",
+}

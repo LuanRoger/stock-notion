@@ -4,7 +4,11 @@ import {
 } from "@/modules/notion/database";
 import { Client } from "@notionhq/client";
 import { getFiiById } from "../status-invest/fiis";
-import { Properties, PropertiesOptions } from "@/models/properties-options";
+import {
+  Properties,
+  PropertiesNameOption,
+  PropertiesOptions,
+} from "@/models/properties-options";
 import { DEFAULT_PAGE_PROPERTIES_NAME } from "@/constants";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
 import { lower } from "@/utils/string";
@@ -12,7 +16,8 @@ import { lower } from "@/utils/string";
 export async function updateDatabaseFiisPageProperties(
   client: Client,
   databaseId: string,
-  rowIdColumnName: string
+  rowIdColumnName: string,
+  propertiesNameOption?: PropertiesNameOption
 ) {
   const fiis = await getDatabaseRowIds(client, databaseId, rowIdColumnName);
 
@@ -31,7 +36,7 @@ export async function updateDatabaseFiisPageProperties(
 
     properties[stock] = fiiDataToPageProperty(
       fii,
-      DEFAULT_PAGE_PROPERTIES_NAME
+      propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
     );
   }
 

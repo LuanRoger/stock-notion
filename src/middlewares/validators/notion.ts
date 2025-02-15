@@ -1,6 +1,8 @@
 import { zValidator } from "@hono/zod-validator";
-import { updateDatabasePagePropertiesSchema } from "./schemas";
-import { notionDatabaseIdSchema } from "./schemas/notion";
+import {
+  updateDatabaseFiisPropertiesSchema,
+  notionDatabaseIdSchema,
+} from "./schemas";
 
 export const notionDatabaseIdValidator = zValidator(
   "param",
@@ -9,5 +11,5 @@ export const notionDatabaseIdValidator = zValidator(
 
 export const updateDatabaseFiisPropertiesValidator = zValidator(
   "json",
-  updateDatabasePagePropertiesSchema
+  updateDatabaseFiisPropertiesSchema
 );
