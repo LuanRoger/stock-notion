@@ -1,6 +1,6 @@
 import { getFiiById as getFiiByIdStatusInvest } from "@/use-casses/status-invest/fiis";
 import { FiiNotFound } from "@/models/errors";
-import { getFiiByIdValidator } from "@/utils/validators";
+import { getFiiByIdValidator } from "@/middlewares/validators";
 import { Hono } from "hono";
 
 const routes = new Hono<{ Bindings: CloudflareBindings }>();
