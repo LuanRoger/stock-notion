@@ -39,21 +39,16 @@ export async function updateDatabasePageProperties(
   properties: PropertiesOptions
 ) {
   const database = await client.databases.query({ database_id: databaseId });
+  const { rowIdColumnName, rowId, properties: updatedProperties } = properties;
 
   const updatePromises: Promise<void>[] = [];
   for (const page of database.results) {
-    const isValid = isValidPage(
-      page,
-      properties.rowIdColumnName,
-      properties.rowId
-    );
+    const isValid = isValidPage(page, rowIdColumnName, rowId);
     if (!isValid) {
       continue;
     }
 
-    properties.properties.forEach((property) => {
-      updatePromises.push(updatePageProperty(client, page.id, property));
-    });
+    updatePageProperty(client, page.id, updatedProperties);
   }
 
   return Promise.all(updatePromises);

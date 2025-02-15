@@ -15,7 +15,7 @@ export const textOrNumberSchema = z.union([
 ]);
 
 export const updateDatabasePagePropertiesSchema = z.object({
-  rowIdColumnName: z.string(),
-  rowId: z.string(),
+  rowIdColumnName: stringSchema,
+  rowId: z.array(stringSchema),
   properties: z.array(textOrNumberSchema),
 });
