@@ -24,7 +24,7 @@ routes.post(
       body.rowIdColumnName
     );
 
-    return c.conten("OK", { status: 201 });
+    return c.text("OK", { status: 201 });
   }
 );
 
