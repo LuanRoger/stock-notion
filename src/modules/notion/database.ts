@@ -4,19 +4,18 @@ import {
 } from "@/models/properties-options";
 import { Client } from "@notionhq/client";
 import { updatePageProperty } from "./page";
-import { isValidPage } from "@/utils/notion";
+import { createFilterByRowId, isValidPage } from "@/utils/notion";
 
 export async function getDatabaseRowIds(
   client: Client,
   databaseId: string,
-  pageIdentifierInfo: PagePropertyIdentifier
+  rowIdColumnName: string
 ) {
-  const { rowId, rowIdColumnName } = pageIdentifierInfo;
   const database = await client.databases.query({ database_id: databaseId });
 
   const rowIds: string[] = [];
   for (const page of database.results) {
-    const isValid = isValidPage(page, rowIdColumnName, rowId);
+    const isValid = isValidPage(page, rowIdColumnName);
     if (!isValid) {
       continue;
     }
@@ -38,17 +37,29 @@ export async function updateDatabasePageProperties(
   databaseId: string,
   properties: PropertiesOptions
 ) {
-  const database = await client.databases.query({ database_id: databaseId });
-  const { rowIdColumnName, rowId, properties: updatedProperties } = properties;
+  const { rowIdColumnName, properties: pageProperties } = properties;
+  const pagesIdFilter = createFilterByRowId(rowIdColumnName, pageProperties);
+  const database = await client.databases.query({
+    database_id: databaseId,
+    filter: {
+      or: pagesIdFilter,
+    },
+  });
 
   const updatePromises: Promise<void>[] = [];
   for (const page of database.results) {
-    const isValid = isValidPage(page, rowIdColumnName, rowId);
+    const isValid = isValidPage(page, rowIdColumnName);
     if (!isValid) {
       continue;
     }
 
-    updatePageProperty(client, page.id, updatedProperties);
+    if (page.properties[rowIdColumnName].type !== "title") {
+      continue;
+    }
+
+    const rowId = page.properties[rowIdColumnName].title[0].plain_text;
+    const pagePropertiesToUpdate = pageProperties[rowId];
+    updatePageProperty(client, page.id, pagePropertiesToUpdate);
   }
 
   return Promise.all(updatePromises);

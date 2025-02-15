@@ -14,8 +14,12 @@ export const textOrNumberSchema = z.union([
   }),
 ]);
 
+export const pagePropertyOptionsSchema = z.object({
+  rowId: stringSchema,
+  properties: z.array(textOrNumberSchema),
+});
+
 export const updateDatabasePagePropertiesSchema = z.object({
   rowIdColumnName: stringSchema,
-  rowId: z.array(stringSchema),
-  properties: z.array(textOrNumberSchema),
+  properties: z.array(pagePropertyOptionsSchema),
 });

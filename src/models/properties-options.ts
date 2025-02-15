@@ -1,10 +1,11 @@
-export interface PagePropertyIdentifier {
+export interface PropertiesOptions {
   rowIdColumnName: string;
-  rowId: string;
+  properties: Record<string, PageProperty[]>;
 }
 
-export interface PropertiesOptions extends PagePropertyIdentifier {
-  properties: PageProperty[];
+export interface PagePropertyIdentifier {
+  rowId: string;
+  rowIdColumnName: string;
 }
 
 interface BaseProperty {
@@ -13,4 +14,5 @@ interface BaseProperty {
 
 export type PageProperty =
   | (BaseProperty & { type: "text"; value: string })
-  | (BaseProperty & { type: "number"; value: number });
+  | (BaseProperty & { type: "number"; value: number })
+  | (BaseProperty & { type: "date"; value: Date });
