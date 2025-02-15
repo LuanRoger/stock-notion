@@ -1,2 +1,5 @@
 export { getFiiByIdValidator } from "./fiis";
-export { updateDatabaseFiisPropertiesValidator } from "./notion";
+export {
+  notionDatabaseIdValidator,
+  updateDatabaseFiisPropertiesValidator,
+} from "./notion";

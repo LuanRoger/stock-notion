@@ -11,7 +11,7 @@ routes.post(
   async (c) => {
     const notionSecret = c.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
-      return c.status(500);
+      return c.text("Secret not set", { status: 500 });
     }
 
     const notionClient = createNotionClient(notionSecret);
@@ -24,7 +24,7 @@ routes.post(
       body.rowIdColumnName
     );
 
-    return c.status(201);
+    return c.conten("OK", { status: 201 });
   }
 );
 

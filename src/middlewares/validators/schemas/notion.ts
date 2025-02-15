@@ -22,3 +22,7 @@ export const textOrNumberSchema = z.union([
 export const updateDatabaseFiisPropertiesSchema = z.object({
   rowIdColumnName: stringSchema,
 });
+
+export const notionDatabaseIdSchema = z.object({
+  databaseId: stringSchema,
+});
