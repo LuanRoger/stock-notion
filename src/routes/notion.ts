@@ -31,7 +31,7 @@ routes.post(
       databaseColumns
     );
 
-    return c.text(APP_RESPONSES.OK, { status: 201 });
+    return c.text(APP_RESPONSES.OK);
   }
 );
 
