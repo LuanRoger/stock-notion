@@ -60,46 +60,56 @@ export async function getFiiById(id: string) {
     throw new FiiNotFound(id);
   }
 
-  console.log(lastYieldValue);
-
   if (!name || !actualValue || !dividendYield) {
     throw new FiiHasInvalidData(id);
   }
+
+  const lastYieldValueParsed = parseNumber(lastYieldValue);
+  const lastYieldPercentageParsed = parseNumber(lastYieldPercentage);
+  const lastYieldBasePriceParsed = parseNumber(lastYieldBasePrice);
+  const lastYieldDateParsed = parseDate(lastYieldDate);
+
+  const nextYieldValueParsed = parseNumber(nextYieldValue);
+  const nextYieldPercentageParsed = parseNumber(nextYieldPercentage);
+  const nextYieldBasePriceParsed = parseNumber(nextYieldBasePrice);
+  const nextYieldDateParsed = parseDate(nextYieldDate);
+
   const doesHaveLastYieldData =
-    lastYieldValue &&
-    lastYieldPercentage &&
-    lastYieldBasePrice &&
-    lastYieldDate;
+    lastYieldValueParsed !== undefined &&
+    lastYieldPercentageParsed !== undefined &&
+    lastYieldBasePriceParsed !== undefined &&
+    lastYieldDateParsed !== undefined;
   const doesHaveNextYieldData =
-    nextYieldValue &&
-    nextYieldPercentage &&
-    nextYieldBasePrice &&
-    nextYieldDate;
+    nextYieldValueParsed !== undefined &&
+    nextYieldPercentageParsed !== undefined &&
+    nextYieldBasePriceParsed !== undefined &&
+    nextYieldDateParsed !== undefined;
 
   const fiiData: FiiData = {
     name,
-    actualValue: parseNumber(actualValue),
-    dividendYield: parseNumber(dividendYield),
+    actualValue: parseNumber(actualValue) ?? 0,
+    dividendYield: parseNumber(dividendYield) ?? 0,
     segment,
     yield: {
       lastYield: doesHaveLastYieldData
         ? {
-            value: parseNumber(lastYieldValue),
-            percentage: parseNumber(lastYieldPercentage),
-            basePrice: parseNumber(lastYieldBasePrice),
-            date: parseDate(lastYieldDate),
+            value: lastYieldValueParsed,
+            percentage: lastYieldPercentageParsed,
+            basePrice: lastYieldBasePriceParsed,
+            date: lastYieldDateParsed,
           }
         : undefined,
       nextYield: doesHaveNextYieldData
         ? {
-            value: parseNumber(nextYieldValue),
-            percentage: parseNumber(nextYieldPercentage),
-            basePrice: parseNumber(nextYieldBasePrice),
-            date: parseDate(nextYieldDate),
+            value: nextYieldValueParsed,
+            percentage: nextYieldPercentageParsed,
+            basePrice: nextYieldBasePriceParsed,
+            date: nextYieldDateParsed,
           }
         : undefined,
     },
   };
+  console.log(fiiData);
 
   return fiiData;
 }

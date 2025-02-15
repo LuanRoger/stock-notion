@@ -12,14 +12,13 @@ export const textOrNumberSchema = z.union([
     type: z.literal("number"),
     value: numberSchema,
   }),
+  z.object({
+    name: stringSchema,
+    type: z.literal("date"),
+    value: z.string().min(1),
+  }),
 ]);
 
-export const pagePropertyOptionsSchema = z.object({
-  rowId: stringSchema,
-  properties: z.array(textOrNumberSchema),
-});
-
-export const updateDatabasePagePropertiesSchema = z.object({
+export const updateDatabaseFiisPropertiesSchema = z.object({
   rowIdColumnName: stringSchema,
-  properties: z.array(pagePropertyOptionsSchema),
 });
