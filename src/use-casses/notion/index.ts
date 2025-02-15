@@ -40,7 +40,6 @@ export async function updateDatabaseFiisPageProperties(
     );
   }
 
-  console.log(properties);
   const propertiesOptions: PropertiesOptions = {
     rowIdColumnName,
     properties,

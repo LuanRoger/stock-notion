@@ -56,7 +56,6 @@ export async function getFiiById(id: string) {
     ?.trim()
     .includes(STATUS_INVEST_NOT_FOUND_PAGE_TEXT);
   if (notFoundPageElementText) {
-    console.log("FII not found");
     throw new FiiNotFound(id);
   }
 
@@ -109,7 +108,6 @@ export async function getFiiById(id: string) {
         : undefined,
     },
   };
-  console.log(fiiData);
 
   return fiiData;
 }
