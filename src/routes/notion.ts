@@ -1,13 +1,13 @@
-import { updateDatabasePagePropertiesValidator } from "@/middlewares/validators";
+import { updateDatabaseFiisPropertiesValidator } from "@/middlewares/validators";
 import { createNotionClient } from "@/modules/notion";
-import { updateDatabasePageProperties } from "@/modules/notion/database";
+import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import { Hono } from "hono";
 
 const routes = new Hono<{ Bindings: CloudflareBindings }>();
 
 routes.post(
-  "/:databaseId",
-  updateDatabasePagePropertiesValidator,
+  "/fiis/:databaseId",
+  updateDatabaseFiisPropertiesValidator,
   async (c) => {
     const notionSecret = c.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
@@ -18,7 +18,11 @@ routes.post(
     const databaseId = c.req.param("databaseId");
     const body = c.req.valid("json");
 
-    await updateDatabasePageProperties(notionClient, databaseId, body);
+    await updateDatabaseFiisPageProperties(
+      notionClient,
+      databaseId,
+      body.rowIdColumnName
+    );
 
     return c.status(201);
   }

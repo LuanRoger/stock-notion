@@ -1,6 +1,6 @@
 export interface PropertiesOptions {
   rowIdColumnName: string;
-  properties: Record<string, PageProperty[]>;
+  properties: Properties;
 }
 
 export interface PagePropertyIdentifier {
@@ -15,4 +15,20 @@ interface BaseProperty {
 export type PageProperty =
   | (BaseProperty & { type: "text"; value: string })
   | (BaseProperty & { type: "number"; value: number })
-  | (BaseProperty & { type: "date"; value: Date });
+  | (BaseProperty & { type: "date"; value: string });
+
+export type Properties = Record<string, PageProperty[]>;
+
+export interface PropertiesNameOption {
+  actualValue: string;
+  dividendYield: string;
+  segment?: string;
+  lastYieldValue?: string;
+  lastYieldPercentage?: string;
+  lastYieldBasePrice?: string;
+  lastYieldDate?: string;
+  nextYieldValue?: string;
+  nextYieldPercentage?: string;
+  nextYieldBasePrice?: string;
+  nextYieldDate?: string;
+}
