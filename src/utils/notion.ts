@@ -39,6 +39,12 @@ export function reduceProperties(properties: PageProperty[]) {
           number: value,
         };
         break;
+      case "date":
+        acc[name] = {
+          type: "date",
+          date: { start: value },
+        };
+        break;
     }
     return acc;
   }, {} as Record<string, any>);

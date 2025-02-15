@@ -8,5 +8,5 @@ export function parseDate(value: string | undefined): Date | undefined {
     return undefined;
   }
 
-  return new Date(year, month, day);
+  return new Date(year, month - 1, day);
 }
