@@ -9,7 +9,6 @@ export function fiiDataToPageProperty(
   const {
     actualValue,
     dividendYield,
-    segment,
     lastYieldValue,
     lastYieldPercentage,
     lastYieldBasePrice,
@@ -30,9 +29,6 @@ export function fiiDataToPageProperty(
     type: "number",
     value: value.dividendYield,
   });
-  if (segment && value.segment) {
-    properties.push({ name: segment, type: "text", value: value.segment });
-  }
   if (lastYieldValue && value.yield.lastYield) {
     properties.push({
       name: lastYieldValue,
