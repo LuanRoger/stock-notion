@@ -5,6 +5,7 @@ import {
 import { Client } from "@notionhq/client";
 import { updatePageProperty } from "./page";
 import { createFilterByRowId, isValidPage } from "@/utils/notion";
+import { lower } from "@/utils/string";
 
 export async function getDatabaseRowIds(
   client: Client,
@@ -22,7 +23,7 @@ export async function getDatabaseRowIds(
 
     const rowIdProperty = page.properties[rowIdColumnName];
     if (rowIdProperty.type !== "title") {
-      return false;
+      continue;
     }
 
     const rowIdText = rowIdProperty.title[0].plain_text;
@@ -46,7 +47,6 @@ export async function updateDatabasePageProperties(
     },
   });
 
-  const updatePromises: Promise<void>[] = [];
   for (const page of database.results) {
     const isValid = isValidPage(page, rowIdColumnName);
     if (!isValid) {
@@ -57,10 +57,8 @@ export async function updateDatabasePageProperties(
       continue;
     }
 
-    const rowId = page.properties[rowIdColumnName].title[0].plain_text;
+    const rowId = lower(page.properties[rowIdColumnName].title[0].plain_text);
     const pagePropertiesToUpdate = pageProperties[rowId];
-    updatePageProperty(client, page.id, pagePropertiesToUpdate);
+    await updatePageProperty(client, page.id, pagePropertiesToUpdate);
   }
-
-  return Promise.all(updatePromises);
 }
