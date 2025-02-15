@@ -1,5 +1,12 @@
-export function parseDate(value: string): Date {
-  const [day, month, year] = value.split("/").map((v) => parseInt(v));
+export function parseDate(value: string | undefined): Date | undefined {
+  if (!value) {
+    return undefined;
+  }
 
-  return new Date(year, month, day);
+  const [day, month, year] = value.split("/").map((v) => parseInt(v));
+  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+    return undefined;
+  }
+
+  return new Date(year, month - 1, day);
 }

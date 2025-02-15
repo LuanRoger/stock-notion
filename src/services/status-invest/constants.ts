@@ -7,7 +7,7 @@ export const STATUS_INVEST_CLASS_SELECTORS = {
   ACTUAL_VALUE:
     ".special > div:nth-child(1) > div:nth-child(1) > strong:nth-child(3)",
   DIVIDEND_YIELD:
-    ".special > div:nth-child(1) > div:nth-child(1) > strong:nth-child(3)",
+    "div.pb-7:nth-child(4) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > strong:nth-child(2)",
   SEGMENT:
     ".top-info-sm-2 > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1) > strong:nth-child(1)",
   YIELD: {
