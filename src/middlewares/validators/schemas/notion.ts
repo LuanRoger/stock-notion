@@ -20,19 +20,21 @@ export const textOrNumberSchema = z.union([
 ]);
 
 export const updateDatabaseFiisPropertiesSchema = z.object({
-  rowIdColumnName: stringSchema,
-  databaseColumns: z.object({
-    actualValue: stringSchema,
-    dividendYield: stringSchema,
-    lastYieldValue: stringSchema.optional(),
-    lastYieldPercentage: stringSchema.optional(),
-    lastYieldBasePrice: stringSchema.optional(),
-    lastYieldDate: stringSchema.optional(),
-    nextYieldValue: stringSchema.optional(),
-    nextYieldPercentage: stringSchema.optional(),
-    nextYieldBasePrice: stringSchema.optional(),
-    nextYieldDate: stringSchema.optional(),
-  }).optional(),
+  rowIdColumnName: stringSchema.optional(),
+  databaseColumns: z
+    .object({
+      actualValue: stringSchema,
+      dividendYield: stringSchema,
+      lastYieldValue: stringSchema.optional(),
+      lastYieldPercentage: stringSchema.optional(),
+      lastYieldBasePrice: stringSchema.optional(),
+      lastYieldDate: stringSchema.optional(),
+      nextYieldValue: stringSchema.optional(),
+      nextYieldPercentage: stringSchema.optional(),
+      nextYieldBasePrice: stringSchema.optional(),
+      nextYieldDate: stringSchema.optional(),
+    })
+    .optional(),
 });
 
 export const notionDatabaseIdSchema = z.object({

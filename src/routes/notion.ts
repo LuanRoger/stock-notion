@@ -1,4 +1,4 @@
-import { APP_RESPONSES } from "@/constants";
+import { APP_RESPONSES, DEFAULT_NOTION_COLUMN_ID_NAME } from "@/constants";
 import {
   notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesValidator,
@@ -20,14 +20,14 @@ routes.post(
     }
 
     const notionClient = createNotionClient(notionSecret);
-    const databaseId = c.req.param("databaseId");
+    const { databaseId } = c.req.valid("param");
     const body = c.req.valid("json");
     const { rowIdColumnName, databaseColumns } = body;
 
     await updateDatabaseFiisPageProperties(
       notionClient,
       databaseId,
-      rowIdColumnName,
+      rowIdColumnName ?? DEFAULT_NOTION_COLUMN_ID_NAME,
       databaseColumns
     );
 
