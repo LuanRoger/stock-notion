@@ -1,3 +1,4 @@
+import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants";
 import { PageProperty } from "@/models/properties-options";
 import { NotionPageOrDatabase } from "@/types";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
@@ -43,6 +44,7 @@ export function reduceProperties(properties: PageProperty[]) {
         acc[name] = {
           type: "date",
           date: { start: value },
+          time_zone: DEFAULT_NOTION_DATE_TIMEZONE,
         };
         break;
     }

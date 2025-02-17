@@ -15,9 +15,11 @@ export const DEFAULT_PAGE_PROPERTIES_NAME: PropertiesNameOption = {
   nextYieldDate: "Próximo Rendimento Data",
 };
 
-export const DEFAULT_NOTION_COLUMN_ID_NAME = "Nome do FII"
+export const DEFAULT_NOTION_COLUMN_ID_NAME = "Nome do FII";
 
 export const APP_RESPONSES = {
   SECRET_NOT_SET: "Secret not set",
   OK: "OK",
-}
+};
+
+export const DEFAULT_NOTION_DATE_TIMEZONE = "America/Sao_Paulo";
