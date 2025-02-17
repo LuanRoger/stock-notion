@@ -1,11 +1,11 @@
 import {
-  PagePropertyIdentifier,
   PropertiesOptions,
 } from "@/models/properties-options";
 import { Client } from "@notionhq/client";
 import { updatePageProperty } from "./page";
 import { createFilterByRowId, isValidPage } from "@/utils/notion";
 import { lower } from "@/utils/string";
+import { NotionReducePropertiesOptions } from "@/models/utils-options";
 
 export async function getDatabaseRowIds(
   client: Client,
@@ -36,7 +36,8 @@ export async function getDatabaseRowIds(
 export async function updateDatabasePageProperties(
   client: Client,
   databaseId: string,
-  properties: PropertiesOptions
+  properties: PropertiesOptions,
+  reduceOptions?: NotionReducePropertiesOptions
 ) {
   const { rowIdColumnName, properties: pageProperties } = properties;
   const pagesIdFilter = createFilterByRowId(rowIdColumnName, pageProperties);
@@ -59,6 +60,11 @@ export async function updateDatabasePageProperties(
 
     const rowId = lower(page.properties[rowIdColumnName].title[0].plain_text);
     const pagePropertiesToUpdate = pageProperties[rowId];
-    await updatePageProperty(client, page.id, pagePropertiesToUpdate);
+    await updatePageProperty(
+      client,
+      page.id,
+      pagePropertiesToUpdate,
+      reduceOptions
+    );
   }
 }
