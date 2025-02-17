@@ -1,5 +1,6 @@
 import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants";
 import { PageProperty } from "@/models/properties-options";
+import { NotionReducePropertiesOptions } from "@/models/utils-options";
 import { NotionPageOrDatabase } from "@/types";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
@@ -20,7 +21,12 @@ export function isValidPage(
   return true;
 }
 
-export function reduceProperties(properties: PageProperty[]) {
+export function reduceProperties(
+  properties: PageProperty[],
+  options?: NotionReducePropertiesOptions
+) {
+  const { timeZone = DEFAULT_NOTION_DATE_TIMEZONE } = options ?? {};
+
   return properties.reduce((acc, { name, type, value }) => {
     switch (type) {
       case "text":
@@ -44,7 +50,7 @@ export function reduceProperties(properties: PageProperty[]) {
         acc[name] = {
           type: "date",
           date: { start: value },
-          time_zone: DEFAULT_NOTION_DATE_TIMEZONE,
+          time_zone: timeZone,
         };
         break;
     }

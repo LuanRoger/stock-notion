@@ -1,4 +1,5 @@
 import { PropertiesNameOption } from "@/models/properties-options";
+import { TimeZone } from "@/models/utils-options";
 
 export const PROMISE_LIST_EXECUTION_DELAY_MS = 300;
 
@@ -22,4 +23,4 @@ export const APP_RESPONSES = {
   OK: "OK",
 };
 
-export const DEFAULT_NOTION_DATE_TIMEZONE = "America/Sao_Paulo";
+export const DEFAULT_NOTION_DATE_TIMEZONE: TimeZone = "America/Sao_Paulo";
