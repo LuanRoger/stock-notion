@@ -3,6 +3,7 @@ import {
   updateDatabaseFiisPropertiesSchema,
   notionDatabaseIdSchema,
 } from "./schemas";
+import { updateDatabaseFiisPropertiesHeadersSchema } from "./schemas/notion";
 
 export const notionDatabaseIdValidator = zValidator(
   "param",
@@ -12,4 +13,9 @@ export const notionDatabaseIdValidator = zValidator(
 export const updateDatabaseFiisPropertiesValidator = zValidator(
   "json",
   updateDatabaseFiisPropertiesSchema
+);
+
+export const updateDatabaseFiisPropertiesHeadersValidator = zValidator(
+  "header",
+  updateDatabaseFiisPropertiesHeadersSchema
 );

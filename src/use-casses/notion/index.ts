@@ -12,12 +12,14 @@ import {
 import { DEFAULT_PAGE_PROPERTIES_NAME } from "@/constants";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
 import { lower } from "@/utils/string";
+import { NotionReducePropertiesOptions } from "@/models/utils-options";
 
 export async function updateDatabaseFiisPageProperties(
   client: Client,
   databaseId: string,
   rowIdColumnName: string,
-  propertiesNameOption?: PropertiesNameOption
+  propertiesNameOption?: PropertiesNameOption,
+  reduceOptions?: NotionReducePropertiesOptions
 ) {
   const fiis = await getDatabaseRowIds(client, databaseId, rowIdColumnName);
 
@@ -44,5 +46,10 @@ export async function updateDatabaseFiisPageProperties(
     rowIdColumnName,
     properties,
   };
-  await updateDatabasePageProperties(client, databaseId, propertiesOptions);
+  await updateDatabasePageProperties(
+    client,
+    databaseId,
+    propertiesOptions,
+    reduceOptions
+  );
 }
