@@ -31,7 +31,6 @@ export function reduceProperties(
     switch (type) {
       case "text":
         acc[name] = {
-          type: "title",
           title: [
             {
               type: "text",
@@ -42,15 +41,12 @@ export function reduceProperties(
         break;
       case "number":
         acc[name] = {
-          type: "number",
           number: value,
         };
         break;
       case "date":
         acc[name] = {
-          type: "date",
-          date: { start: value },
-          time_zone: timeZone,
+          date: { start: value, time_zone: timeZone },
         };
         break;
     }
