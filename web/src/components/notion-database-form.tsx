@@ -18,6 +18,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { cn } from "@/utils/tailwind";
 import DatabaseIdInfoIcon from "./database-id-info-icon";
+import { useActionState } from "react";
+import { sendStockMessage } from "@/app/actions/queue";
 
 interface NotionDatabaseFormProps {
   className?: string;
@@ -32,15 +34,12 @@ export default function NotionDatabaseForm({
       databaseId: "",
     },
   });
-
-  function onSubmit(data: NotionDatabase) {
-    console.log(data);
-  }
+  const [state, formAction, isPending] = useActionState(sendStockMessage, {});
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        action={formAction}
         className={cn("flex flex-col gap-4", className)}
       >
         <FormField
@@ -53,14 +52,21 @@ export default function NotionDatabaseForm({
                 <DatabaseIdInfoIcon />
               </FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input required {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         ></FormField>
 
-        <Button className="self-end">Atualizar</Button>
+        {state.error && (
+          <div className="text-destructive-foreground">
+            {state.error}
+          </div>
+        )}
+        <Button className="self-end" disabled={isPending}>
+          Atualizar
+        </Button>
       </form>
     </Form>
   );

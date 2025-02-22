@@ -6,9 +6,11 @@ export function createClient() {
   });
 }
 
-export function createSendCommand(message: string | undefined) {
+export function createSendCommand(message: unknown) {
+  const jsonMessage = JSON.stringify(message);
+
   return new SendMessageCommand({
-    MessageBody: message,
+    MessageBody: jsonMessage,
     QueueUrl: process.env.SQS_QUEUE_URL,
   });
 }

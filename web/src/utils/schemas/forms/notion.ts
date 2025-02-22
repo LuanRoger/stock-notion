@@ -2,7 +2,7 @@ import { z } from "zod";
 import { stringSchema } from "../commons";
 
 export const notionDatabaseSchema = z.object({
-  databaseId: z.string().min(1),
+  databaseId: stringSchema,
 });
 
 export const notionSettingsSchema = z.object({
