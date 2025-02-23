@@ -2,17 +2,17 @@
 
 import { UpdateNotionFiiDataQueuePayload } from "@/models/notion";
 import { ActionState } from "@/models/state";
-import { createClient, createSendCommand } from "@/services/queue";
+import { createClient } from "@/services/queue";
 import { notionDatabaseSchema } from "@/utils/schemas/forms/notion";
 
 export async function sendStockMessage(
   _: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const result = await notionDatabaseSchema.safeParseAsync({
+  const parseResult = await notionDatabaseSchema.safeParseAsync({
     databaseId: formData.get("databaseId"),
   });
-  if (!result.success) {
+  if (!parseResult.success) {
     return {
       success: false,
       error: "Informações inválidas",
@@ -20,14 +20,17 @@ export async function sendStockMessage(
   }
 
   const message: UpdateNotionFiiDataQueuePayload = {
-    databaseId: result.data.databaseId,
+    databaseId: parseResult.data.databaseId,
   };
+
   try {
     const client = createClient();
-    const sendCommand = createSendCommand(message);
-
-    await client.send(sendCommand);
-  } catch {
+    await client.publishJSON({
+      url: process.env.QSTASH_URL!,
+      body: message,
+    });
+  } catch (error) {
+    console.error(error);
     return {
       success: false,
       error: "Um error ocorreu",
