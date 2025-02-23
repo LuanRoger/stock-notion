@@ -1,5 +1,5 @@
-import { PropertiesNameOption } from "@/models/properties-options";
-import { TimeZone } from "@/models/utils-options";
+import { type PropertiesNameOption } from "@/models/properties-options";
+import { type TimeZone } from "@/models/utils-options";
 
 export const PROMISE_LIST_EXECUTION_DELAY_MS = 300;
 

@@ -1,5 +1,5 @@
-import { PageProperty } from "@/models/properties-options";
-import { NotionReducePropertiesOptions } from "@/models/utils-options";
+import { type PageProperty } from "@/models/properties-options";
+import { type NotionReducePropertiesOptions } from "@/models/utils-options";
 import { reduceProperties } from "@/utils/notion";
 import { Client } from "@notionhq/client";
 

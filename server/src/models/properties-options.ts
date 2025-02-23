@@ -20,8 +20,8 @@ export type PageProperty =
 export type Properties = Record<string, PageProperty[]>;
 
 export interface PropertiesNameOption {
-  actualValue: string;
-  dividendYield: string;
+  actualValue?: string;
+  dividendYield?: string;
   lastYieldValue?: string;
   lastYieldPercentage?: string;
   lastYieldBasePrice?: string;

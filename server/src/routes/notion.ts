@@ -4,12 +4,14 @@ import {
   updateDatabaseFiisPropertiesHeadersValidator,
   updateDatabaseFiisPropertiesValidator,
 } from "@/middlewares/validators";
-import { NotionReducePropertiesOptions } from "@/models/utils-options";
+import { type NotionReducePropertiesOptions } from "@/models/utils-options";
 import { createNotionClient } from "@/modules/notion";
+import type { Env } from "@/types";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import { Hono } from "hono";
+import { env } from "hono/adapter";
 
-const routes = new Hono<{ Bindings: CloudflareBindings }>();
+const routes = new Hono<{ Bindings: Env }>();
 
 routes.post(
   "/fiis/:databaseId",
@@ -17,7 +19,7 @@ routes.post(
   updateDatabaseFiisPropertiesValidator,
   updateDatabaseFiisPropertiesHeadersValidator,
   async (c) => {
-    const notionSecret = c.env.NOTION_INTEGRATION_SECRET;
+    const { NOTION_INTEGRATION_SECRET: notionSecret } = env<{ NOTION_INTEGRATION_SECRET: string }>(c);
     if (!notionSecret) {
       return c.text(APP_RESPONSES.SECRET_NOT_SET, { status: 500 });
     }

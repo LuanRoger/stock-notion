@@ -1,11 +1,9 @@
-import {
-  PropertiesOptions,
-} from "@/models/properties-options";
+import { type PropertiesOptions } from "@/models/properties-options";
 import { Client } from "@notionhq/client";
 import { updatePageProperty } from "./page";
 import { createFilterByRowId, isValidPage } from "@/utils/notion";
 import { lower } from "@/utils/string";
-import { NotionReducePropertiesOptions } from "@/models/utils-options";
+import { type NotionReducePropertiesOptions } from "@/models/utils-options";
 
 export async function getDatabaseRowIds(
   client: Client,

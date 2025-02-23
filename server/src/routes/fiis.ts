@@ -2,14 +2,12 @@ import { getFiiById as getFiiByIdStatusInvest } from "@/use-casses/status-invest
 import { FiiNotFound } from "@/models/errors";
 import { getFiiByIdValidator } from "@/middlewares/validators";
 import { Hono } from "hono";
+import type { Env } from "@/types";
 
-const routes = new Hono<{ Bindings: CloudflareBindings }>();
+const routes = new Hono<{ Bindings: Env }>();
 
 routes.get("/:id", getFiiByIdValidator, async (c) => {
-  const fiiId = c.req.param("id");
-  if (!fiiId) {
-    return c.status(400);
-  }
+  const { id: fiiId } = c.req.valid("param");
 
   try {
     const fii = await getFiiByIdStatusInvest(fiiId);

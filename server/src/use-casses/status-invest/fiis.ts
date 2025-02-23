@@ -1,5 +1,5 @@
 import { FiiHasInvalidData, FiiNotFound } from "@/models/errors";
-import { FiiData } from "@/models/fii";
+import type { FiiData } from "@/models/fii";
 import { getFiiById as getFiiByIdStatusInvest } from "@/services";
 import {
   STATUS_INVEST_CLASS_SELECTORS,

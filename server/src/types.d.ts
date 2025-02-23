@@ -6,7 +6,7 @@ import {
 } from "@notionhq/client/build/src/api-endpoints";
 
 type Env = {
-  Variables: CloudflareBindings;
+  NOTION_INTEGRATION_SECRET: string;
 };
 
 export type NotionPageOrDatabase =

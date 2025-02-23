@@ -4,7 +4,7 @@ import {
 } from "@/modules/notion/database";
 import { Client } from "@notionhq/client";
 import { getFiiById } from "../status-invest/fiis";
-import {
+import type {
   Properties,
   PropertiesNameOption,
   PropertiesOptions,
@@ -12,7 +12,7 @@ import {
 import { DEFAULT_PAGE_PROPERTIES_NAME } from "@/constants";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
 import { lower } from "@/utils/string";
-import { NotionReducePropertiesOptions } from "@/models/utils-options";
+import type { NotionReducePropertiesOptions } from "@/models/utils-options";
 
 export async function updateDatabaseFiisPageProperties(
   client: Client,
