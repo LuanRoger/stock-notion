@@ -23,7 +23,7 @@ export default function ConfigureNotionField({
             Mapeamento dos campos
           </div>
         </AccordionTrigger>
-        <AccordionContent>
+        <AccordionContent className="p-2">
           <NotionSettingsForm />
         </AccordionContent>
       </AccordionItem>
