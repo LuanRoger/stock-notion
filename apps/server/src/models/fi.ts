@@ -2,6 +2,7 @@ export interface FiData {
   name: string;
   actualValue: number;
   dividendYield: number;
+  pvp: number;
   segment?: string;
   yield: {
     lastYield?: {
