@@ -1,6 +1,6 @@
 import { FiHasInvalidData, FiNotFound } from "@/models/errors";
 import type { FiData } from "@/models/fi";
-import { getFiiById as getFiiByIdStatusInvest } from "@/services";
+import { getFiagroById as getFiagroByIdStatusInvest } from "@/services";
 import {
   STATUS_INVEST_CLASS_SELECTORS,
   STATUS_INVEST_NOT_FOUND_PAGE_ELEMENT,
@@ -9,8 +9,8 @@ import {
 import { parseDate } from "@/utils/date";
 import { parseNumber } from "@/utils/numbers";
 
-export async function getFiiById(id: string) {
-  const page = await getFiiByIdStatusInvest(id);
+export async function getFiagroById(id: string) {
+  const page = await getFiagroByIdStatusInvest(id);
 
   const name = page.querySelector(
     STATUS_INVEST_CLASS_SELECTORS.NAME

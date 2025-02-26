@@ -1,6 +1,8 @@
 export const STATUS_INVEST_BASE_URL = "https://statusinvest.com.br";
 export const STATUS_INVEST_FII_PATH = "/fundos-imobiliarios";
+export const STATUS_INVEST_FIAGRO_PATH = "/fiagros";
 export const STATUS_INVEST_FII_BASE_URL = `${STATUS_INVEST_BASE_URL}${STATUS_INVEST_FII_PATH}/`;
+export const STATUS_INVEST_FIAGRO_BASE_URL = `${STATUS_INVEST_BASE_URL}${STATUS_INVEST_FIAGRO_PATH}/`;
 
 export const STATUS_INVEST_CLASS_SELECTORS = {
   NAME: "h1.lh-4",

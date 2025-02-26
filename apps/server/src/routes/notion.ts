@@ -14,7 +14,7 @@ import { env } from "hono/adapter";
 const routes = new Hono<{ Bindings: Env }>();
 
 routes.post(
-  "/fiis/:databaseId",
+  ":databaseId",
   notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesValidator,
   updateDatabaseFiisPropertiesHeadersValidator,

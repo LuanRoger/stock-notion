@@ -1,4 +1,4 @@
-export interface FiiData {
+export interface FiData {
   name: string;
   actualValue: number;
   dividendYield: number;

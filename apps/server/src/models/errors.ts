@@ -1,10 +1,10 @@
-export class FiiNotFound extends Error {
+export class FiNotFound extends Error {
   constructor(id: string) {
     super(`FII ${id} not found`);
   }
 }
 
-export class FiiHasInvalidData extends Error {
+export class FiHasInvalidData extends Error {
   constructor(id: string) {
     super(`FII ${id} has invalid data`);
   }

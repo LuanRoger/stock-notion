@@ -1,4 +1,5 @@
 import FiisRoutes from "./fiis";
+import FiagroRoutes from "./fiagro";
 import NotionRoutes from "./notion";
 
-export { FiisRoutes, NotionRoutes };
+export { FiisRoutes, FiagroRoutes, NotionRoutes };
