@@ -57,6 +57,7 @@ export async function updateDatabasePageProperties(
     }
 
     const rowId = lower(page.properties[rowIdColumnName].title[0].plain_text);
+    console.log("updateDatabasePageProperties", rowId);
     const pagePropertiesToUpdate = pageProperties[rowId];
     await updatePageProperty(
       client,
