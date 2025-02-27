@@ -1,10 +1,10 @@
 import { FiHasInvalidData, FiNotFound, FiNotFoundRule } from "@/models/errors";
 import type { FiData } from "@/models/fi";
-import { getFiiById as getFiiByIdStatusInvest } from "@/services";
+import { getFiagroById as getFiagroByIdStatusInvest } from "@/services";
 import { parseFiPage } from "@/utils/status-invest/html-parser";
 
-export async function getFiiById(id: string) {
-  const page = await getFiiByIdStatusInvest(id);
+export async function getFiagroById(id: string) {
+  const page = await getFiagroByIdStatusInvest(id);
 
   let fiData: FiData;
   try {

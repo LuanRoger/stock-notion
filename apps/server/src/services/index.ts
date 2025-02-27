@@ -1,1 +1,1 @@
-export { getFiiById } from "./status-invest";
+export { getFiiById, getFiagroById } from "./status-invest";

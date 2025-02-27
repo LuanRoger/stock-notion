@@ -9,6 +9,7 @@ export async function updatePageProperty(
   properties: PageProperty[],
   options?: NotionReducePropertiesOptions
 ) {
+  console.log("updatePageProperty", id, properties, options);
   const notionProperties = reduceProperties(properties, options);
 
   await client.pages.update({

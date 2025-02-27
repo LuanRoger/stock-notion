@@ -1,11 +1,11 @@
-import { type FiiData } from "../fii";
+import type { FiData } from "../fi";
 import {
   type PageProperty,
   type PropertiesNameOption,
 } from "../properties-options";
 
 export function fiiDataToPageProperty(
-  value: FiiData,
+  value: FiData,
   options: PropertiesNameOption
 ): PageProperty[] {
   const properties: PageProperty[] = [];
@@ -20,6 +20,7 @@ export function fiiDataToPageProperty(
     nextYieldPercentage,
     nextYieldBasePrice,
     nextYieldDate,
+    pvp,
   } = options;
 
   properties.push({
@@ -31,6 +32,11 @@ export function fiiDataToPageProperty(
     name: dividendYield,
     type: "number",
     value: value.dividendYield,
+  });
+  properties.push({
+    name: pvp,
+    type: "number",
+    value: value.pvp,
   });
   if (lastYieldValue && value.yield.lastYield) {
     properties.push({

@@ -1,11 +1,23 @@
-export class FiiNotFound extends Error {
+export class FiNotFound extends Error {
   constructor(id: string) {
-    super(`FII ${id} not found`);
+    super(`FI ${id} not found`);
   }
 }
 
-export class FiiHasInvalidData extends Error {
+export class FiHasInvalidData extends Error {
   constructor(id: string) {
-    super(`FII ${id} has invalid data`);
+    super(`FI ${id} has invalid data`);
+  }
+}
+
+export class FiParseError extends Error {
+  constructor() {
+    super(`FI parse error`);
+  }
+}
+
+export class FiNotFoundRule extends Error {
+  constructor() {
+    super(`FI not found rule`);
   }
 }

@@ -14,6 +14,7 @@ export const DEFAULT_PAGE_PROPERTIES_NAME: PropertiesNameOption = {
   nextYieldPercentage: "Próximo Rendimento (%)",
   nextYieldBasePrice: "Próximo Rendimento Preço Base",
   nextYieldDate: "Próximo Rendimento Data",
+  pvp: "P/VP",
 };
 
 export const DEFAULT_NOTION_COLUMN_ID_NAME = "Nome do FII";

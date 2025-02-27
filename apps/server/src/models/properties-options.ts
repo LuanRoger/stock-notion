@@ -30,4 +30,5 @@ export interface PropertiesNameOption {
   nextYieldPercentage?: string;
   nextYieldBasePrice?: string;
   nextYieldDate?: string;
+  pvp?: string;
 }

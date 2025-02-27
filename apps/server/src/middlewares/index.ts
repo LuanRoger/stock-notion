@@ -1,5 +1,5 @@
 export {
-  getFiiByIdValidator,
+  getFiByIdValidator,
   notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesHeadersValidator,
   updateDatabaseFiisPropertiesValidator,
