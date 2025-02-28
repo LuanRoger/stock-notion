@@ -41,7 +41,9 @@ export default function NotionDatabaseForm({
     try {
       setIsLoading(true);
       await sendStockMessage(data);
+
       showToast("Atualizações agendaas com sucesso");
+      form.reset();
     } catch (error) {
       if (error instanceof Error) {
         showErrorToast("Um erro ocorreu", error.message);
