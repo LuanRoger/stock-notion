@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const fiSchema = z.string().regex(/^[A-Z]{4}11$/);
+export const fiSchema = z.string().regex(/^[A-Za-z]{4}11$/);
 
 export const stringSchema = z.string().min(1);
 
