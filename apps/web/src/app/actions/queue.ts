@@ -1,8 +1,9 @@
 "use server";
 
-import { UpdateNotionFiiDataQueuePayload } from "@/models/notion";
+import { NOTION_DATABASE_FI_QUEUE } from "@/constants";
+import { UpdateNotionFiDataQueuePayload } from "@/models/notion";
 import { ActionState } from "@/models/state";
-import { createClient } from "@/services/queue";
+import { createPublisher } from "@/services/queue";
 import { notionDatabaseSchema } from "@/utils/schemas/forms/notion";
 
 export async function sendStockMessage(
@@ -19,22 +20,21 @@ export async function sendStockMessage(
     };
   }
 
-  const message: UpdateNotionFiiDataQueuePayload = {
+  const message: UpdateNotionFiDataQueuePayload = {
     databaseId: parseResult.data.databaseId,
   };
 
+  const client = createPublisher(NOTION_DATABASE_FI_QUEUE);
   try {
-    const client = createClient();
-    await client.publishJSON({
-      url: process.env.QSTASH_URL!,
-      body: message,
-    });
+    await client.send({ exchange: NOTION_DATABASE_FI_QUEUE }, message);
   } catch (error) {
     console.error(error);
     return {
       success: false,
       error: "Um error ocorreu",
     };
+  } finally {
+    await client.close();
   }
 
   return {

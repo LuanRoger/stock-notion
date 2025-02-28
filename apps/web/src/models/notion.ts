@@ -1,3 +1,3 @@
-export interface UpdateNotionFiiDataQueuePayload {
+export interface UpdateNotionFiDataQueuePayload {
   databaseId: string;
 }

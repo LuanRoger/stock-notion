@@ -1,5 +1,14 @@
-import { Client } from "@upstash/qstash";
+import { Connection } from "rabbitmq-client";
 
-export function createClient() {
-  return new Client({ token: process.env.QSTASH_TOKEN! });
+function createConnection() {
+  return new Connection(process.env.RABBITMQ_URL);
+}
+
+export function createPublisher(exchange: string) {
+  const connection = createConnection();
+  return connection.createPublisher({
+    confirm: true,
+    maxAttempts: 2,
+    exchanges: [{ exchange, type: "topic" }],
+  });
 }
