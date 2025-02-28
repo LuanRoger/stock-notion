@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { numberSchema, stringSchema } from "./commons";
+import { fiSchema, numberSchema, stringSchema } from "./commons";
 import { timeZoneValues } from "@/models/utils-options";
 
 export const textOrNumberSchema = z.union([
@@ -41,6 +41,15 @@ export const updateDatabaseFiisPropertiesSchema = z.object({
 export const notionDatabaseIdSchema = z.object({
   databaseId: stringSchema,
 });
+
+export const fiTicketSchema = z.object({
+  ticket: fiSchema,
+});
+
+export const updateDatabaseFiTicketSchema = z.object({
+  ...fiTicketSchema.shape,
+  ...notionDatabaseIdSchema.shape,
+})
 
 export const updateDatabaseFiisPropertiesHeadersSchema = z.object({
   TimeZone: z.enum(timeZoneValues).optional(),

@@ -50,7 +50,6 @@ export async function updateDatabaseFiisPageProperties(
     rowIdColumnName,
     properties,
   };
-  console.log("updateDatabaseFiisPageProperties", propertiesOptions);
   await updateDatabasePageProperties(
     client,
     databaseId,

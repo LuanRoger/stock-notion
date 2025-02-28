@@ -1,9 +1,10 @@
 import { APP_RESPONSES, DEFAULT_NOTION_COLUMN_ID_NAME } from "@/constants";
 import {
+  notionDatabaseIdTicketValidator,
   notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesHeadersValidator,
   updateDatabaseFiisPropertiesValidator,
-} from "@/middlewares/validators";
+} from "@/middlewares";
 import { type NotionReducePropertiesOptions } from "@/models/utils-options";
 import { createNotionClient } from "@/modules/notion";
 import type { Env } from "@/types";
@@ -14,12 +15,30 @@ import { env } from "hono/adapter";
 const routes = new Hono<{ Bindings: Env }>();
 
 routes.post(
+  ":databaseId/:ticket",
+  notionDatabaseIdTicketValidator,
+  async (c) => {
+    const { NOTION_INTEGRATION_SECRET: notionSecret } = env<{
+      NOTION_INTEGRATION_SECRET: string;
+    }>(c);
+    if (!notionSecret) {
+      return c.text(APP_RESPONSES.SECRET_NOT_SET, { status: 500 });
+    }
+
+    const notionClient = createNotionClient(notionSecret);
+    const { databaseId, ticket } = c.req.valid("param");
+  }
+);
+
+routes.post(
   ":databaseId",
   notionDatabaseIdValidator,
   updateDatabaseFiisPropertiesValidator,
   updateDatabaseFiisPropertiesHeadersValidator,
   async (c) => {
-    const { NOTION_INTEGRATION_SECRET: notionSecret } = env<{ NOTION_INTEGRATION_SECRET: string }>(c);
+    const { NOTION_INTEGRATION_SECRET: notionSecret } = env<{
+      NOTION_INTEGRATION_SECRET: string;
+    }>(c);
     if (!notionSecret) {
       return c.text(APP_RESPONSES.SECRET_NOT_SET, { status: 500 });
     }
