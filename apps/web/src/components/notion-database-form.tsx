@@ -15,11 +15,12 @@ import {
 } from "@/utils/schemas/forms/notion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 import { cn } from "@/utils/tailwind";
 import DatabaseIdInfoIcon from "./database-id-info-icon";
-import { useActionState } from "react";
+import { useState } from "react";
+import LoadingButton from "./loading-button";
 import { sendStockMessage } from "@/app/actions/queue";
+import { showErrorToast, showToast } from "@/utils/toast";
 
 interface NotionDatabaseFormProps {
   className?: string;
@@ -34,12 +35,28 @@ export default function NotionDatabaseForm({
       databaseId: "",
     },
   });
-  const [state, formAction, isPending] = useActionState(sendStockMessage, {});
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleSubmit(data: NotionDatabase) {
+    try {
+      setIsLoading(true);
+      await sendStockMessage(data);
+      showToast("Atualizações agendaas com sucesso");
+    } catch (error) {
+      if (error instanceof Error) {
+        showErrorToast("Um erro ocorreu", error.message);
+      } else {
+        showErrorToast("Um erro ocorreu");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <Form {...form}>
       <form
-        action={formAction}
+        onSubmit={form.handleSubmit(handleSubmit)}
         className={cn("flex flex-col gap-4", className)}
       >
         <FormField
@@ -52,21 +69,16 @@ export default function NotionDatabaseForm({
                 <DatabaseIdInfoIcon />
               </FormLabel>
               <FormControl>
-                <Input required {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         ></FormField>
 
-        {state.error && (
-          <div className="text-destructive-foreground">
-            {state.error}
-          </div>
-        )}
-        <Button className="self-end" disabled={isPending}>
+        <LoadingButton className="self-end transition-all" isLoading={isLoading}>
           Atualizar
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

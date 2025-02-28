@@ -1,3 +1,4 @@
+import { LoadingText } from "./loading-text";
 import { Button } from "./ui/button";
 
 export interface LoadingButtonProps extends React.ComponentProps<"button"> {
@@ -7,11 +8,12 @@ export interface LoadingButtonProps extends React.ComponentProps<"button"> {
 export default function LoadingButton({
   isLoading,
   children,
+  className,
   ...props
 }: LoadingButtonProps) {
   return (
-    <Button disabled={isLoading} {...props}>
-      {isLoading ? "Loading..." : children}
+    <Button className={className} disabled={isLoading} {...props}>
+      {isLoading ? <LoadingText>Atualizando...</LoadingText> : children}
     </Button>
   );
 }

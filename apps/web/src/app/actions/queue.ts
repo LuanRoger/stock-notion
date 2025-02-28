@@ -4,24 +4,16 @@ import { NOTION_DATABASE_FI_QUEUE } from "@/constants";
 import { UpdateNotionFiDataQueuePayload } from "@/models/notion";
 import { ActionState } from "@/models/state";
 import { createPublisher } from "@/services/queue";
-import { notionDatabaseSchema } from "@/utils/schemas/forms/notion";
+import {
+  NotionDatabase,
+} from "@/utils/schemas/forms/notion";
 
 export async function sendStockMessage(
-  _: ActionState,
-  formData: FormData
+  data: NotionDatabase
 ): Promise<ActionState> {
-  const parseResult = await notionDatabaseSchema.safeParseAsync({
-    databaseId: formData.get("databaseId"),
-  });
-  if (!parseResult.success) {
-    return {
-      success: false,
-      error: "Informações inválidas",
-    };
-  }
-
+  const { databaseId } = data;
   const message: UpdateNotionFiDataQueuePayload = {
-    databaseId: parseResult.data.databaseId,
+    databaseId: databaseId,
   };
 
   const client = createPublisher(NOTION_DATABASE_FI_QUEUE);
