@@ -3,7 +3,7 @@ import {
   updateDatabasePageProperties,
 } from "@/modules/notion/database";
 import { Client } from "@notionhq/client";
-import { getFiiById } from "../status-invest/fiis";
+import { getFiById } from "../status-invest/fiis";
 import { getFiagroById } from "../status-invest/fiagro";
 import type {
   Properties,
@@ -29,9 +29,9 @@ export async function updateDatabaseFiisPageProperties(
   for (const fi of fis) {
     const fiId = lower(fi);
     try {
-      const fii = await getFiiById(fiId);
+      const fiData = await getFiById(fiId);
       properties[fiId] = fiiDataToPageProperty(
-        fii,
+        fiData,
         propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
       );
     } catch (error) {
@@ -50,7 +50,37 @@ export async function updateDatabaseFiisPageProperties(
     rowIdColumnName,
     properties,
   };
-  console.log("updateDatabaseFiisPageProperties", propertiesOptions);
+  await updateDatabasePageProperties(
+    client,
+    databaseId,
+    propertiesOptions,
+    reduceOptions
+  );
+}
+
+export async function updateDatabaseFiTicketPageProperties(
+  client: Client,
+  databaseId: string,
+  rowIdColumnName: string,
+  ticket: string,
+  propertiesNameOption?: PropertiesNameOption,
+  reduceOptions?: NotionReducePropertiesOptions
+) {
+  const fiTicket = lower(ticket);
+  const fiData = await getFiById(ticket);
+
+  const pageProperties = fiiDataToPageProperty(
+    fiData,
+    propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
+  );
+  const properties: Properties = {
+    [fiTicket]: pageProperties,
+  };
+
+  const propertiesOptions: PropertiesOptions = {
+    rowIdColumnName,
+    properties,
+  };
   await updateDatabasePageProperties(
     client,
     databaseId,
