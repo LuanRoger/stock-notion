@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Domine } from "next/font/google";
 import Footer from "@/components/footer";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -11,6 +11,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const domine = Domine({
+  variable: "--font-domine",
   subsets: ["latin"],
 });
 
@@ -27,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased py-16 gap-4`}
+        className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} antialiased py-16 gap-4`}
       >
         {children}
         <Footer />
