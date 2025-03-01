@@ -1,24 +1,24 @@
-import ConfigureNotionField from "@/components/configure-notion-fields";
 import HowToUseSection from "@/components/how-to-use-section";
 import NotionDatabaseForm from "@/components/notion-database-form";
-import Subtitle from "@/components/subtitle";
+import NotionSettingsForm from "@/components/notion-settings-form";
+import SectionWrapper from "@/components/section-wrapper";
 import Title from "@/components/title";
-import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { SettingsIcon } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex flex-col items-center gap-2">
-        <Title className="text-center" />
-        <Subtitle />
-      </div>
-      <Card className="w-full">
-        <CardContent>
-          <NotionDatabaseForm />
-        </CardContent>
-      </Card>
-      <ConfigureNotionField className="w-full" />
+    <div className="flex flex-col">
+      <Title className="px-16 mb-16" />
+      <SectionWrapper title="Banco de dados do Notion" collapsible={false}>
+        <NotionDatabaseForm />
+      </SectionWrapper>
+      <SectionWrapper
+        title="Configuração dos campos"
+        icon={<SettingsIcon size={16} />}
+      >
+        <NotionSettingsForm />
+      </SectionWrapper>
       <Separator />
       <HowToUseSection />
       <Separator />

@@ -3,7 +3,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row justify-between text-muted-foreground font-mono text-sm">
+    <footer className="flex flex-row justify-between text-muted-foreground font-mono text-sm px-16">
       <span>
         Criado por{" "}
         <Link

@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased py-16 px-16 lg:px-32 flex flex-col gap-4`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased py-16 gap-4`}
       >
         {children}
         <Footer />

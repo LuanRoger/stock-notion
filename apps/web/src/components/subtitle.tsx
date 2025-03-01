@@ -9,7 +9,7 @@ export default function Subtitle({ className }: SubtitleProps) {
   return (
     <h2
       className={cn(
-        "text-muted-foreground font-mono text-lg text-center lg:text-left",
+        "text-muted-foreground text-lg",
         className
       )}
     >

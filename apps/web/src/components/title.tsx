@@ -1,5 +1,6 @@
 import { cn } from "@/utils/tailwind";
 import { DatabaseIcon } from "lucide-react";
+import Subtitle from "./subtitle";
 
 interface TitleProps {
   className?: string;
@@ -7,14 +8,14 @@ interface TitleProps {
 
 export default function Title({ className }: TitleProps) {
   return (
-    <h1
-      className={cn(
-        "inline-flex gap-2 items-center font-bold text-3xl",
-        className
-      )}
-    >
-      <DatabaseIcon size={32} />
-      Stock
-    </h1>
+    <div className={cn("flex flex-row items-center gap-3", className)}>
+      <div className="size-12 bg-[#37352F] rounded-lg flex items-center justify-center group-hover:bg-[#2E2C27] transition-colors">
+        <DatabaseIcon size={24} color="white" />
+      </div>
+      <div className="flex flex-col">
+        <h1 className="text-4xl font-serif tracking-tight">Stock</h1>
+        <Subtitle />
+      </div>
+    </div>
   );
 }
