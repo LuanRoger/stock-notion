@@ -15,12 +15,13 @@ export default function Home() {
       </SectionWrapper>
       <SectionWrapper
         title="Configuração dos campos"
-        icon={<SettingsIcon size={16} />}
+        icon={<SettingsIcon size={18} />}
       >
         <NotionSettingsForm />
       </SectionWrapper>
-      <Separator />
-      <HowToUseSection />
+      <SectionWrapper title="Como usar" collapsible={false}>
+        <HowToUseSection />
+      </SectionWrapper>
       <Separator />
     </div>
   );

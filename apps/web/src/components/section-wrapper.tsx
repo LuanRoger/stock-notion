@@ -1,7 +1,7 @@
 import { cn } from "@/utils/tailwind";
-import { ArrowRightIcon } from "lucide-react";
-import { Accordion, AccordionContent, AccordionTrigger } from "./ui/accordion";
+import { Accordion, AccordionContent } from "./ui/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
+import SectionWrapperTrigger from "./section-wrapper-trigger";
 
 interface SectionWrapperProps {
   className?: string;
@@ -29,13 +29,11 @@ export default function SectionWrapper({
       )}
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger disabled={!collapsible}>
-          <div className="inline-flex items-center gap-2">
-            <ArrowRightIcon size={16} />
-            {icon}
-            <h2>{title}</h2>
-          </div>
-        </AccordionTrigger>
+        <SectionWrapperTrigger
+          title={title}
+          icon={icon}
+          collapsible={collapsible}
+        />
         <AccordionContent className="px-7">{children}</AccordionContent>
       </AccordionItem>
     </Accordion>
