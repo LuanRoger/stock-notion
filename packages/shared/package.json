@@ -1,0 +1,17 @@
+{
+  "name": "@repo/shared",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@repo/typescript-config": "*"
+  },
+  "exports": {
+    "./constants": "./src/constants/index.ts",
+    "./utils": "./src/utils/index.ts"
+  }
+}
