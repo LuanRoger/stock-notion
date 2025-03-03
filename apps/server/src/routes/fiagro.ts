@@ -1,4 +1,4 @@
-import { getFiByIdValidator } from "@/middlewares/validators/fiis";
+import { getFiByIdValidator } from "@/middlewares/validators/fis";
 import { FiNotFound } from "@/models/errors";
 import type { Env } from "@/types";
 import { getFiagroById } from "@/use-casses/status-invest/fiagro";
