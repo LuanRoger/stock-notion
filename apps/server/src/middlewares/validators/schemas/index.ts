@@ -1,4 +1,4 @@
-export { getFiByIdSchema as getFiiByIdSchema } from "./fiis";
+export { getFiByIdSchema as getFiiByIdSchema } from "./fis";
 export {
   textOrNumberSchema,
   updateDatabaseFiisPropertiesSchema,
