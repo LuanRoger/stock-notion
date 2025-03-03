@@ -2,11 +2,11 @@ import {
   DEFAULT_NOTION_COLUMN_ID_NAME,
   NOTION_DATABASE_FI_QUEUE,
 } from "@/constants";
-import type { UpdateNotionDatabaseFiMessage } from "@/models/queue";
+import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { createConsumer } from "@/services/queue";
 import { createNotionClient } from ".";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
-import type { NotionReducePropertiesOptions } from "@/models/utils-options";
+import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 
 export function createNotionDatabaseFiQueueConsumer() {
   return createConsumer<UpdateNotionDatabaseFiMessage>(

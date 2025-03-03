@@ -1,6 +1,6 @@
 import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants";
 import type { PageProperty } from "@/models/properties-options";
-import type { NotionReducePropertiesOptions } from "@/models/utils-options";
+import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 import type { NotionPageOrDatabase } from "@/types";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
@@ -27,31 +27,34 @@ export function reduceProperties(
 ) {
   const { timeZone = DEFAULT_NOTION_DATE_TIMEZONE } = options ?? {};
 
-  return properties.reduce((acc, { name, type, value }) => {
-    switch (type) {
-      case "text":
-        acc[name] = {
-          title: [
-            {
-              type: "text",
-              text: { content: value },
-            },
-          ],
-        };
-        break;
-      case "number":
-        acc[name] = {
-          number: value,
-        };
-        break;
-      case "date":
-        acc[name] = {
-          date: { start: value, time_zone: timeZone },
-        };
-        break;
-    }
-    return acc;
-  }, {} as Record<string, any>);
+  return properties.reduce(
+    (acc, { name, type, value }) => {
+      switch (type) {
+        case "text":
+          acc[name] = {
+            title: [
+              {
+                type: "text",
+                text: { content: value },
+              },
+            ],
+          };
+          break;
+        case "number":
+          acc[name] = {
+            number: value,
+          };
+          break;
+        case "date":
+          acc[name] = {
+            date: { start: value, time_zone: timeZone },
+          };
+          break;
+      }
+      return acc;
+    },
+    {} as Record<string, any>
+  );
 }
 
 export function createFilterByRowId(
