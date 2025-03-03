@@ -5,13 +5,14 @@
     "dev": "tsx watch --env-file=.env src/index.ts"
   },
   "dependencies": {
-    "@repo/shared": "*",
     "@hono/node-server": "^1.13.8",
     "@hono/zod-validator": "^0.4.3",
     "@notionhq/client": "^2.2.16",
+    "@repo/shared": "*",
     "hono": "^4.7.2",
     "node-html-parser": "^7.0.1",
-    "rabbitmq-client": "^5.0.2"
+    "rabbitmq-client": "^5.0.2",
+    "redis": "^4.7.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.5",

@@ -1,7 +1,6 @@
 import { APP_MESSAGES } from "@/constants";
-import {
-  notionDatabaseFiQueueConsumer,
-} from "@/modules/notion/queue";
+import { notionDatabaseFiQueueConsumer } from "@/modules/notion/queue";
+import { redisClient } from "@/services/cache";
 import { rabbitMqConnection } from "@/services/queue";
 import type { AddressInfo } from "node:net";
 
@@ -14,6 +13,7 @@ export async function onServerCloses() {
   console.log(APP_MESSAGES.CLOSSING_RABBIT_MQ_CONNECTION);
   await notionDatabaseFiQueueConsumer.close();
   await rabbitMqConnection.close();
+  await redisClient.quit();
 
   console.log(APP_MESSAGES.CLOSSING_SERVER);
 }
