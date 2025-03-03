@@ -1,7 +1,7 @@
 {
   "name": "server",
   "scripts": {
-    "start": "node --env-file=.env dist/bundle.js",
+    "start": "node dist/bundle.js",
     "dev": "tsx watch --env-file=.env src/index.ts",
     "build": "webpack -c ./webpack.config.js"
   },
