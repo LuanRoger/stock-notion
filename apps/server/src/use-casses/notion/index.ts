@@ -10,11 +10,11 @@ import type {
   PropertiesNameOption,
   PropertiesOptions,
 } from "@/models/properties-options";
-import { DEFAULT_PAGE_PROPERTIES_NAME } from "@/constants";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
 import { lower } from "@/utils/string";
 import type { NotionReducePropertiesOptions } from "@/models/utils-options";
 import { FiNotFound } from "@/models/errors";
+import { mergePropertiesNameOption } from "@/utils/object";
 
 export async function updateDatabaseFiisPageProperties(
   client: Client,
@@ -24,6 +24,7 @@ export async function updateDatabaseFiisPageProperties(
   reduceOptions?: NotionReducePropertiesOptions
 ) {
   const fis = await getDatabaseRowIds(client, databaseId, rowIdColumnName);
+  const databasePropertiesName = mergePropertiesNameOption(propertiesNameOption);
 
   const properties: Properties = {};
   for (const fi of fis) {
@@ -32,7 +33,7 @@ export async function updateDatabaseFiisPageProperties(
       const fiData = await getFiById(fiId);
       properties[fiId] = fiiDataToPageProperty(
         fiData,
-        propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
+        databasePropertiesName
       );
     } catch (error) {
       if (!(error instanceof FiNotFound)) {
@@ -41,7 +42,7 @@ export async function updateDatabaseFiisPageProperties(
       const fiagro = await getFiagroById(fiId);
       properties[fiId] = fiiDataToPageProperty(
         fiagro,
-        propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
+        databasePropertiesName
       );
     }
   }
@@ -71,7 +72,7 @@ export async function updateDatabaseFiTicketPageProperties(
 
   const pageProperties = fiiDataToPageProperty(
     fiData,
-    propertiesNameOption ?? DEFAULT_PAGE_PROPERTIES_NAME
+    mergePropertiesNameOption(propertiesNameOption)
   );
   const properties: Properties = {
     [fiTicket]: pageProperties,
