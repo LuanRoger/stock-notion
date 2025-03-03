@@ -5,7 +5,7 @@ import {
   updateDatabaseFiisPropertiesHeadersValidator,
   updateDatabaseFiisPropertiesValidator,
 } from "@/middlewares";
-import { type NotionReducePropertiesOptions } from "@/models/utils-options";
+import { type NotionReducePropertiesOptions } from "@repo/shared/models";
 import { createNotionClient } from "@/modules/notion";
 import type { Env } from "@/types";
 import {

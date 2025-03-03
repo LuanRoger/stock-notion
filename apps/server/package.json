@@ -5,6 +5,7 @@
     "dev": "tsx watch --env-file=.env src/index.ts"
   },
   "dependencies": {
+    "@repo/shared": "*",
     "@hono/node-server": "^1.13.8",
     "@hono/zod-validator": "^0.4.3",
     "@notionhq/client": "^2.2.16",

@@ -12,7 +12,7 @@ import type {
 } from "@/models/properties-options";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
 import { lower } from "@/utils/string";
-import type { NotionReducePropertiesOptions } from "@/models/utils-options";
+import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 import { FiNotFound } from "@/models/errors";
 import { mergePropertiesNameOption } from "@/utils/object";
 
@@ -24,26 +24,21 @@ export async function updateDatabaseFiisPageProperties(
   reduceOptions?: NotionReducePropertiesOptions
 ) {
   const fis = await getDatabaseRowIds(client, databaseId, rowIdColumnName);
-  const databasePropertiesName = mergePropertiesNameOption(propertiesNameOption);
+  const databasePropertiesName =
+    mergePropertiesNameOption(propertiesNameOption);
 
   const properties: Properties = {};
   for (const fi of fis) {
     const fiId = lower(fi);
     try {
       const fiData = await getFiById(fiId);
-      properties[fiId] = fiiDataToPageProperty(
-        fiData,
-        databasePropertiesName
-      );
+      properties[fiId] = fiiDataToPageProperty(fiData, databasePropertiesName);
     } catch (error) {
       if (!(error instanceof FiNotFound)) {
         throw error;
       }
       const fiagro = await getFiagroById(fiId);
-      properties[fiId] = fiiDataToPageProperty(
-        fiagro,
-        databasePropertiesName
-      );
+      properties[fiId] = fiiDataToPageProperty(fiagro, databasePropertiesName);
     }
   }
 

@@ -1,4 +1,4 @@
-import type { TimeZone } from "./utils-options";
+import { TimeZone } from "../types";
 
 export interface UpdateNotionDatabaseFiMessage {
   databaseId: string;

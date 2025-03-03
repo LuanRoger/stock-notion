@@ -338,7 +338,3 @@ export const timeZoneValues = [
   "America/Yakutat",
   "America/Yellowknife",
 ] as const;
-
-export interface NotionReducePropertiesOptions {
-  timeZone?: TimeZone;
-}
