@@ -1,7 +1,7 @@
 "use server";
 
 import { NOTION_DATABASE_FI_QUEUE } from "@/constants";
-import { UpdateNotionFiDataQueuePayload } from "@/models/notion";
+import { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { ActionState } from "@/models/state";
 import { createPublisher } from "@/services/queue";
 import { NotionDatabase } from "@/utils/schemas/forms/notion";
@@ -10,7 +10,7 @@ export async function sendStockMessage(
   data: NotionDatabase
 ): Promise<ActionState> {
   const { databaseId } = data;
-  const message: UpdateNotionFiDataQueuePayload = {
+  const message: UpdateNotionDatabaseFiMessage = {
     databaseId: databaseId,
   };
 
