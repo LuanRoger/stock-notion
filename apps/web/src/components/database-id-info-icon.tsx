@@ -7,14 +7,18 @@ import {
 } from "./ui/tooltip";
 
 interface DatabaseIdInfoIconProps {
+  className?: string;
   iconSize?: number;
 }
 
-export default function DatabaseIdInfoIcon({ iconSize = 16 }: DatabaseIdInfoIconProps) {
+export default function DatabaseIdInfoIcon({
+  className,
+  iconSize = 16,
+}: DatabaseIdInfoIconProps) {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger className={className} type="button">
           <InfoIcon size={iconSize} />
         </TooltipTrigger>
         <TooltipContent>

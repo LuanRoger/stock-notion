@@ -179,7 +179,7 @@ export default function NotionSettingsForm() {
           ></FormField>
         </div>
 
-        <Button>Save</Button>
+        <Button className="self-end">Salvar</Button>
       </form>
     </Form>
   );

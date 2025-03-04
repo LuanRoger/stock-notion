@@ -7,16 +7,10 @@ interface SubtitleProps {
 
 export default function Subtitle({ className }: SubtitleProps) {
   return (
-    <h2
-      className={cn(
-        "text-muted-foreground text-lg",
-        className
-      )}
-    >
-      <span>
-        Preço de fundos imobiliarios direto no{" "}
-        <SiNotion className="inline-block" /> Notion.
-      </span>
+    <h2 className={cn("text-muted-foreground text-lg", className)}>
+      Preço de fundos imobiliarios direto no{" "}
+      <SiNotion className="inline-block" /> {" "}
+      Notion.
     </h2>
   );
 }
