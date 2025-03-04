@@ -12,6 +12,7 @@
   },
   "exports": {
     "./models": "./src/models/index.ts",
-    "./types": "./src/types/index.ts"
+    "./types": "./src/types/index.ts",
+    "./utils": "./src/utils/index.ts"
   }
 }
