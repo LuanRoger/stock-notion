@@ -43,7 +43,7 @@ export default function Sections() {
   return (
     <Reorder.Group values={order} onReorder={onReorder}>
       {order.map((sectionName) => {
-        if (sectionName === "notion-database") {
+        if (sectionName === DEFAULT_NOTION_DATABASE_SECTION_KEY) {
           return (
             <Reorder.Item
               key={DEFAULT_NOTION_DATABASE_SECTION_KEY}

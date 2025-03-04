@@ -32,7 +32,7 @@ export default function SectionWrapper({
       )}
     >
       {onDragStart && (
-        <div className="absolute left-1 inset-y-0 h-full inline-flex justify-center items-center transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+        <div className="absolute left-1 inset-y-0 h-full hidden lg:inline-flex justify-center items-center transition-opacity duration-300 opacity-0 group-hover:opacity-100">
           <GripVerticalIcon
             onPointerDown={onDragStart}
             size={18}
@@ -46,7 +46,7 @@ export default function SectionWrapper({
           icon={icon}
           collapsible={collapsible}
         />
-        <AccordionContent className="px-12">{children}</AccordionContent>
+        <AccordionContent className="px-4 lg:px-12">{children}</AccordionContent>
       </AccordionItem>
     </Accordion>
   );
