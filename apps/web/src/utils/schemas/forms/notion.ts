@@ -6,16 +6,17 @@ export const notionDatabaseSchema = z.object({
 });
 
 export const notionSettingsSchema = z.object({
-  actualValue: stringSchema,
-  dividendYield: stringSchema,
-  lastYieldValue: stringSchema.optional(),
-  lastYieldPercentage: stringSchema.optional(),
-  lastYieldBasePrice: stringSchema.optional(),
-  lastYieldDate: stringSchema.optional(),
-  nextYieldValue: stringSchema.optional(),
-  nextYieldPercentage: stringSchema.optional(),
-  nextYieldBasePrice: stringSchema.optional(),
-  nextYieldDate: stringSchema.optional(),
+  actualValue: z.string().optional(),
+  dividendYield: z.string().optional(),
+  pvp: z.string().optional(),
+  lastYieldValue: z.string().optional(),
+  lastYieldPercentage: z.string().optional(),
+  lastYieldBasePrice: z.string().optional(),
+  lastYieldDate: z.string().optional(),
+  nextYieldValue: z.string().optional(),
+  nextYieldPercentage: z.string().optional(),
+  nextYieldBasePrice: z.string().optional(),
+  nextYieldDate: z.string().optional(),
 });
 
 export type NotionDatabase = z.infer<typeof notionDatabaseSchema>;

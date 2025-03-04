@@ -17,15 +17,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { notionSettingsDefaultValues } from "@/constants";
+import { getLocalStorage, setLocalStorage } from "@/utils/local-storage";
+import { NOTION_FIELDS_MAPPING_KEY } from "@/constants/local-storage";
+import { showToast } from "@/utils/toast";
+import {
+  mergeWithDefaults,
+  setUndefinedForEmptyStrings,
+} from "@repo/shared/utils";
 
 export default function NotionSettingsForm() {
   const form = useForm<NotionSettings>({
     resolver: zodResolver(notionSettingsSchema),
-    defaultValues: notionSettingsDefaultValues,
+    defaultValues: mergeWithDefaults(
+      getLocalStorage(NOTION_FIELDS_MAPPING_KEY),
+      notionSettingsDefaultValues
+    ),
   });
 
   function onSubmit(data: NotionSettings) {
-    console.log(data);
+    const sanitizedData = setUndefinedForEmptyStrings(data);
+    setLocalStorage(NOTION_FIELDS_MAPPING_KEY, sanitizedData);
+    showToast("Configurações salvas com sucesso!");
   }
 
   return (
