@@ -27,7 +27,7 @@ export default function SectionWrapper({
       collapsible={collapsible}
       value={collapsible ? undefined : "item-1"}
       className={cn(
-        "flex flex-col gap-4 p-4 px-7 hover:bg-muted transition-colors relative group",
+        "flex flex-col gap-4 p-4 px-7 bg-background hover:bg-muted transition-colors relative group",
         className
       )}
     >
