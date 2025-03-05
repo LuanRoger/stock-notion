@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} antialiased py-16 gap-4`}
+        className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} antialiased py-14 gap-4`}
       >
         {children}
         <Footer />

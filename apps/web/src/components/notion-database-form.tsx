@@ -42,7 +42,7 @@ export default function NotionDatabaseForm({
       setIsLoading(true);
       await sendStockMessage(data);
 
-      showToast("Atualizações agendaas com sucesso");
+      showToast("Atualização requisitada com sucesso!");
       form.reset();
     } catch (error) {
       if (error instanceof Error) {
