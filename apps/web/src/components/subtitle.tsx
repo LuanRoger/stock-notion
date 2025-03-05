@@ -8,7 +8,7 @@ interface SubtitleProps {
 export default function Subtitle({ className }: SubtitleProps) {
   return (
     <h2 className={cn("text-muted-foreground text-lg", className)}>
-      Os principais indicadores de fundos de investimento sempre atualizado no {" "}
+      Os principais indicadores de fundos de investimento sempre atualizados no {" "}
       <SiNotion className="inline-block" /> Notion.
     </h2>
   );
