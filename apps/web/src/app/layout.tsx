@@ -20,8 +20,9 @@ const domine = Domine({
 });
 
 export const metadata: Metadata = {
-  title: "Notion Stock",
-  description: "An automation for get stock data and update, all from Notion",
+  title: "Stock",
+  description:
+    "Os principais indicadores de fundos de investimento sempre atualizados no Notion",
 };
 
 export default function RootLayout({
