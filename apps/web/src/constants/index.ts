@@ -6,3 +6,4 @@ export {
   DEFAULT_NOTION_SETTINGS_SECTION_KEY,
   DEFAULT_FAQ_SECTION_KEY,
 } from "./order";
+export { PRIMARY_BACKDROP_FILTER } from "./styles";

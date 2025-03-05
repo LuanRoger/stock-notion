@@ -1,15 +1,16 @@
 import Link from "./link";
-import { SiGithub } from "@icons-pack/react-simple-icons";
-import ProductIcon from "./product-icon";
+import Image from "next/image";
 import FooterLink from "./footer-link";
+import ExtendedProductIcon from "./extended-product-icon";
+import inLogo from "@/app/assets/in.png";
+import lrLogo from "@/app/assets/lr-logo.png";
+import ghLogo from "@/app/assets/gh-logo.png";
+import { PRIMARY_BACKDROP_FILTER } from "@/constants";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col justify-between gap-5 text-muted-foreground font-mono text-sm px-6 lg:px-16 mt-16">
-      <div className="inline-flex items-center gap-2">
-        <ProductIcon className="size-8" textClassName="text-xl" />
-        <h1 className="text-3xl font-serif tracking-tight">Stock</h1>
-      </div>
+    <footer className="flex flex-col justify-between gap-5 text-muted-foreground font-mono text-sm px-6 lg:px-16 mt-10">
+      <ExtendedProductIcon className="w-fit" isLink />
 
       <div className="flex flex-col w-fit gap-2">
         <FooterLink href="/terms/privacy-policies">
@@ -19,26 +20,34 @@ export default function Footer() {
         <FooterLink href="">Perfil do criador</FooterLink>
       </div>
 
-      <div className="flex justify-between w-full">
-        <span>
-          Criado por{" "}
-          <Link
-            className="hover:underline"
-            href="www.linkedin.com/in/luan-roger"
-            target="_blank"
-          >
-            Luan Roger
-          </Link>
-        </span>
-        <span>
-          <Link
-            href="https://github.com/LuanRoger/stock-notion"
-            target="_blank"
-          >
-            <SiGithub />
-          </Link>
-          <Link href=""></Link>
-        </span>
+      <div className="flex items-center self-end gap-2">
+        <Link href="https://www.linkedin.com/in/luanroger/">
+          <Image
+            src={inLogo}
+            width={30}
+            height={30}
+            alt={"Logo do Linkedin"}
+            className={PRIMARY_BACKDROP_FILTER}
+          />
+        </Link>
+        <Link href="https://github.com/LuanRoger/stock-notion" target="_blank">
+          <Image
+            src={ghLogo}
+            width={50}
+            height={50}
+            alt={"Logo do GitHub"}
+            className={PRIMARY_BACKDROP_FILTER}
+          />
+        </Link>
+        <Link href="https://portfolio.luanroger.dev">
+          <Image
+            src={lrLogo}
+            width={40}
+            height={40}
+            alt={"Logo do Luan Roger"}
+            className={PRIMARY_BACKDROP_FILTER}
+          />
+        </Link>
       </div>
     </footer>
   );
