@@ -12,8 +12,9 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-col w-fit gap-2">
-        <FooterLink href="">Política de privacidade</FooterLink>
-        <FooterLink href="">Termos de uso</FooterLink>
+        <FooterLink href="/terms/privacy-policies">
+          Política de privacidade
+        </FooterLink>
         <FooterLink href="">Template</FooterLink>
         <FooterLink href="">Perfil do criador</FooterLink>
       </div>
