@@ -1,18 +1,20 @@
 "use client";
 
 import {
+  DEFAULT_FAQ_SECTION_KEY,
   DEFAULT_HOW_TO_USE_SECTION_KEY,
   DEFAULT_NOTION_DATABASE_SECTION_KEY,
   DEFAULT_NOTION_SETTINGS_SECTION_KEY,
 } from "@/constants";
 import NotionDatabaseForm from "./notion-database-form";
 import SectionWrapper from "./section-wrapper";
-import { SettingsIcon } from "lucide-react";
+import { BookOpenIcon, CircleHelpIcon, SettingsIcon } from "lucide-react";
 import NotionSettingsForm from "./notion-settings-form";
 import HowToUseSection from "./how-to-use-section";
 import { DragControls, Reorder, useDragControls } from "motion/react";
 import { OrderKeys } from "@/types/order";
 import { ReactNode } from "react";
+import FaqSection from "./faq-section";
 
 interface SectionConfig {
   title: string;
@@ -37,8 +39,14 @@ const SECTIONS_CONFIG: Record<OrderKeys, SectionConfig> = {
   [DEFAULT_HOW_TO_USE_SECTION_KEY]: {
     title: "Como usar",
     collapsible: false,
-    icon: null,
+    icon: <BookOpenIcon size={18} />,
     component: HowToUseSection,
+  },
+  [DEFAULT_FAQ_SECTION_KEY]: {
+    title: "Perguntas frequentes",
+    collapsible: true,
+    icon: <CircleHelpIcon size={18} />,
+    component: FaqSection,
   },
 };
 
