@@ -140,6 +140,26 @@ export default function FaqSection() {
           </p>
         }
       />
+      <FaqItem
+        title="Há limite de quantas requisições de atualização posso fazer?"
+        description={
+          <p>
+            Sim. Para evitar abusos, há um limite de 1 requisição de atualização
+            a cada 1 minuto(s). Atualizações feitas antes desse tempo não serão
+            processadas.
+          </p>
+        }
+      />
+      <FaqItem
+        title="Há limite de quantas ativos são atualizados por requisição?"
+        description={
+          <p>
+            Sim. Há um limite de 50 ativos por requisição de atualização. Se sua
+            base de dados do Notion possui mais de 50 ativos, os ativos depois
+            do 50º não serão atualizados.
+          </p>
+        }
+      />
     </div>
   );
 }
