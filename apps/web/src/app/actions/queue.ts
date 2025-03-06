@@ -5,10 +5,20 @@ import { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { ActionState } from "@/models/state";
 import { createPublisher } from "@/services/queue";
 import { NotionDatabase } from "@/utils/schemas/forms/notion";
+import { headers } from "next/headers";
+import { checkLimit } from "@/services/rate-limiter";
 
 export async function sendStockMessage(
   data: NotionDatabase
 ): Promise<ActionState> {
+  const sooManyRequests = await checkLimit(await headers());
+  if (sooManyRequests) {
+    return {
+      success: false,
+      error: "Muitas requisições",
+    };
+  }
+
   const { databaseId } = data;
   const message: UpdateNotionDatabaseFiMessage = {
     databaseId: databaseId,

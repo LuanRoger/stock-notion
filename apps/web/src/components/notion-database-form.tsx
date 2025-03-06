@@ -40,9 +40,13 @@ export default function NotionDatabaseForm({
   async function handleSubmit(data: NotionDatabase) {
     try {
       setIsLoading(true);
-      await sendStockMessage(data);
+      const actionResult = await sendStockMessage(data);
+      if (actionResult.success) {
+        showToast("Atualização requisitada com sucesso");
+      } else {
+        showErrorToast("Um erro ocorreu", actionResult.error);
+      }
 
-      showToast("Atualização requisitada com sucesso!");
       form.reset();
     } catch (error) {
       if (error instanceof Error) {
@@ -78,7 +82,10 @@ export default function NotionDatabaseForm({
           )}
         ></FormField>
 
-        <LoadingButton className="self-end transition-all" isLoading={isLoading}>
+        <LoadingButton
+          className="self-end transition-all"
+          isLoading={isLoading}
+        >
           Atualizar
         </LoadingButton>
       </form>
