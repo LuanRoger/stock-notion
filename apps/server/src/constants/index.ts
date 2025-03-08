@@ -1,6 +1,7 @@
 import { type PropertiesNameOption } from "@/models/properties-options";
 import { type TimeZone } from "@repo/shared/types";
-export { NOTION_DATABASE_FI_QUEUE } from "./queue";
+
+export { NOTION_DATABASE_FI_CHANNEL } from "./queue";
 
 export const PROMISE_LIST_EXECUTION_DELAY_MS = 300;
 

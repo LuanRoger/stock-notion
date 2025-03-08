@@ -1,9 +1,9 @@
 "use server";
 
-import { NOTION_DATABASE_FI_QUEUE } from "@/constants";
+import { NOTION_DATABASE_FI_CHANNEL } from "@/constants";
 import { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { ActionState } from "@/models/state";
-import { publishToChannel } from "@/services/queue";
+import { publishToChannel } from "@/services/subscriber";
 import { NotionDatabase } from "@/utils/schemas/forms/notion";
 import { headers } from "next/headers";
 import { checkLimit } from "@/services/rate-limiter";
@@ -25,7 +25,7 @@ export async function sendStockMessage(
   };
 
   try {
-    await publishToChannel(NOTION_DATABASE_FI_QUEUE, message);
+    await publishToChannel(NOTION_DATABASE_FI_CHANNEL, message);
   } catch (error) {
     console.error(error);
     return {

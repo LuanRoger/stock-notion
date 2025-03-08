@@ -1,5 +1,5 @@
 export { NOTION_SETTINGS_DEFAULT_VALUES } from "./defaults";
-export { NOTION_DATABASE_FI_QUEUE } from "./queue";
+export { NOTION_DATABASE_FI_CHANNEL } from "./channel";
 export {
   DEFAULT_NOTION_DATABASE_SECTION_KEY,
   DEFAULT_HOW_TO_USE_SECTION_KEY,

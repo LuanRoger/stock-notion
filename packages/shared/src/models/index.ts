@@ -1,2 +1,2 @@
-export type { UpdateNotionDatabaseFiMessage } from "./queue";
+export type { UpdateNotionDatabaseFiMessage } from "./channel";
 export type { NotionReducePropertiesOptions } from "./time";

@@ -1,6 +1,6 @@
 import {
   DEFAULT_NOTION_COLUMN_ID_NAME,
-  NOTION_DATABASE_FI_QUEUE,
+  NOTION_DATABASE_FI_CHANNEL,
 } from "@/constants";
 import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { subscribeToChannel } from "@/services/subscriber";
@@ -10,7 +10,7 @@ import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 
 export function subscribeNotionDatabaseFi() {
   subscribeToChannel<UpdateNotionDatabaseFiMessage>(
-    NOTION_DATABASE_FI_QUEUE,
+    NOTION_DATABASE_FI_CHANNEL,
     updateNotionDatabaseFi
   );
 }

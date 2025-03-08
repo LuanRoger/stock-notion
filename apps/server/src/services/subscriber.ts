@@ -1,20 +1,20 @@
 import { subscriberRedisClient } from "./redis";
 
 export function subscribeToChannel<T>(
-  queueName: string,
+  channelName: string,
   callback: (message: T) => Promise<void>
 ) {
-  subscriberRedisClient.subscribe(queueName, async (error, count) => {
+  subscriberRedisClient.subscribe(channelName, async (error, _) => {
     if (error) {
-      console.error("Error on queue: ", error);
+      console.error("Error on subscriber: ", error);
       return;
     }
 
-    console.log(`Subscribed to ${queueName} queues`);
+    console.log(`Subscribed to ${channelName} subscriber`);
   });
 
   subscriberRedisClient.on("message", async (channel, message) => {
-    if (channel !== queueName) {
+    if (channel !== channelName) {
       return;
     }
 
