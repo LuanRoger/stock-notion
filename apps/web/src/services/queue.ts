@@ -1,14 +1,8 @@
-import { Connection } from "rabbitmq-client";
+import { createRedisClient } from "./redis";
 
-function createConnection() {
-  return new Connection(process.env.RABBITMQ_URL);
-}
+export async function publishToChannel(exchange: string, message: unknown) {
+  const redisClient = createRedisClient();
+  const jsonMessage = JSON.stringify(message);
 
-export function createPublisher(exchange: string) {
-  const connection = createConnection();
-  return connection.createPublisher({
-    confirm: true,
-    maxAttempts: 2,
-    exchanges: [{ exchange, type: "topic" }],
-  });
+  await redisClient.publish(exchange, jsonMessage);
 }
