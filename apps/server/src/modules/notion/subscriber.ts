@@ -3,7 +3,7 @@ import {
   NOTION_DATABASE_FI_QUEUE,
 } from "@/constants";
 import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
-import { subscribeToChannel } from "@/services/queue";
+import { subscribeToChannel } from "@/services/subscriber";
 import { createNotionClient } from ".";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";
