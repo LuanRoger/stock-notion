@@ -3,20 +3,17 @@ import {
   NOTION_DATABASE_FI_QUEUE,
 } from "@/constants";
 import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
-import { createConsumer } from "@/services/queue";
+import { subscribeToChannel } from "@/services/queue";
 import { createNotionClient } from ".";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 
-export function createNotionDatabaseFiQueueConsumer() {
-  return createConsumer<UpdateNotionDatabaseFiMessage>(
+export function subscribeNotionDatabaseFi() {
+  subscribeToChannel<UpdateNotionDatabaseFiMessage>(
     NOTION_DATABASE_FI_QUEUE,
     updateNotionDatabaseFi
   );
 }
-
-export const notionDatabaseFiQueueConsumer =
-  createNotionDatabaseFiQueueConsumer();
 
 async function updateNotionDatabaseFi(message: UpdateNotionDatabaseFiMessage) {
   const notionSecret = process.env.NOTION_INTEGRATION_SECRET;

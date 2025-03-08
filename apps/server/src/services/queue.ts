@@ -1,33 +1,24 @@
-import { APP_MESSAGES } from "@/constants";
-import { Connection } from "rabbitmq-client";
+import { redisClient } from "./redis";
 
-export function initRabbitMq() {
-  const connectionString = process.env.RABBITMQ_URL;
-  if (!connectionString) {
-    console.log(APP_MESSAGES.RABBIT_MQ_CONNECTION_STRING_NOT_SET);
-  }
-
-  const rabbit = new Connection(connectionString);
-  return rabbit;
-}
-
-export const rabbitMqConnection = initRabbitMq();
-
-export function createConsumer<T>(
+export function subscribeToChannel<T>(
   queueName: string,
   callback: (message: T) => Promise<void>
 ) {
-  const consumer = rabbitMqConnection.createConsumer(
-    {
-      queue: queueName,
-      exchanges: [{ exchange: queueName, type: "topic" }],
-      queueBindings: [{ exchange: queueName, routingKey: "*" }],
-    },
-    (message) => {
-      const { body } = message;
-      callback(body as T);
+  redisClient.subscribe(queueName, async (error, count) => {
+    if (error) {
+      console.error("Error on queue: ", error);
+      return;
     }
-  );
 
-  return consumer;
+    console.log(`Subscribed to ${queueName} queues`);
+  });
+
+  redisClient.on("message", async (channel, message) => {
+    if (channel !== queueName) {
+      return;
+    }
+
+    const parsedMessage = JSON.parse(message) as T;
+    await callback(parsedMessage);
+  });
 }
