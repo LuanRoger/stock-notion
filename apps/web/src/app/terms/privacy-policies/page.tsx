@@ -1,4 +1,4 @@
-export default function PrivacyPolicies() {
+export default function PrivacyPoliciesPage() {
   return (
     <>
       <span>

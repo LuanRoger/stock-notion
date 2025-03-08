@@ -16,6 +16,7 @@ export default function Footer() {
         <FooterLink href="/terms/privacy-policies">
           Política de privacidade
         </FooterLink>
+        <FooterLink href="/terms/use-terms">Termos de uso</FooterLink>
         <FooterLink href="">Template</FooterLink>
         <FooterLink href="">Perfil do criador</FooterLink>
       </div>
