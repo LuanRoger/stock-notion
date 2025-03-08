@@ -3,7 +3,7 @@ import {
   NOTION_DATABASE_FI_CHANNEL,
 } from "@/constants";
 import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
-import { subscribeToChannel } from "@/services/subscriber";
+import { subscribeToChannel } from "@/services/channel";
 import { createNotionClient } from ".";
 import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";

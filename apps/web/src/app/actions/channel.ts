@@ -3,7 +3,7 @@
 import { NOTION_DATABASE_FI_CHANNEL } from "@/constants";
 import { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
 import { ActionState } from "@/models/state";
-import { publishToChannel } from "@/services/subscriber";
+import { publishToChannel } from "@/services/channel";
 import { NotionDatabase } from "@/utils/schemas/forms/notion";
 import { headers } from "next/headers";
 import { checkLimit } from "@/services/rate-limiter";

@@ -1,5 +1,5 @@
 import { APP_MESSAGES } from "@/constants";
-import { subscribeNotionDatabaseFi } from "@/modules/notion/subscriber";
+import { subscribeNotionDatabaseFi } from "@/modules/notion/channel";
 import { redisClient } from "@/services/redis";
 import type { AddressInfo } from "node:net";
 
