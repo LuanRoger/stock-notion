@@ -1,6 +1,7 @@
 import { type PropertiesNameOption } from "@/models/properties-options";
 import { type TimeZone } from "@repo/shared/types";
-export { NOTION_DATABASE_FI_QUEUE } from "./queue";
+
+export { NOTION_DATABASE_FI_CHANNEL } from "./queue";
 
 export const PROMISE_LIST_EXECUTION_DELAY_MS = 300;
 
@@ -28,11 +29,9 @@ export const APP_RESPONSES = {
 };
 
 export const APP_MESSAGES = {
-  RABBIT_MQ_CONNECTION_STRING_NOT_SET: "RabbitMQ connection string not set",
+  CLOSSING_REDIS_CONNECTION: "Closing Redis connection",
   REDIS_CONNECTION_STRING_NOT_SET: "Redis connection string not set",
-  CLOSSING_RABBIT_MQ_CONNECTION: "Closing RabbitMQ connection",
   CLOSSING_SERVER: "Closing server",
-  CREATE_RABBIT_MQ_CONSUMERS: "Creating RabbitMQ consumers",
 };
 
 export const DEFAULT_NOTION_DATE_TIMEZONE: TimeZone = "America/Sao_Paulo";

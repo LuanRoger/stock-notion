@@ -19,7 +19,7 @@ import { cn } from "@/utils/tailwind";
 import DatabaseIdInfoIcon from "./database-id-info-icon";
 import { useState } from "react";
 import LoadingButton from "./loading-button";
-import { sendStockMessage } from "@/app/actions/queue";
+import { sendStockMessage } from "@/app/actions/channel";
 import { showErrorToast, showToast } from "@/utils/toast";
 
 interface NotionDatabaseFormProps {

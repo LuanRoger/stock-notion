@@ -1,18 +1,9 @@
 import { RateLimit, ms } from "@diiiazote/redis-rate-limit";
-import Redis from "ioredis";
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
-
-function createClient() {
-  const redisUrl = process.env.REDIS_URL;
-  if (!redisUrl) {
-    return null;
-  }
-
-  return new Redis(redisUrl);
-}
+import { createRedisClient } from "./redis";
 
 export function createRateLimiter() {
-  const client = createClient();
+  const client = createRedisClient();
   if (!client) {
     return null;
   }
