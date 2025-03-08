@@ -29,11 +29,9 @@ export const APP_RESPONSES = {
 };
 
 export const APP_MESSAGES = {
-  RABBIT_MQ_CONNECTION_STRING_NOT_SET: "RabbitMQ connection string not set",
+  CLOSSING_REDIS_CONNECTION: "Closing Redis connection",
   REDIS_CONNECTION_STRING_NOT_SET: "Redis connection string not set",
-  CLOSSING_RABBIT_MQ_CONNECTION: "Closing RabbitMQ connection",
   CLOSSING_SERVER: "Closing server",
-  CREATE_RABBIT_MQ_CONSUMERS: "Creating RabbitMQ consumers",
 };
 
 export const DEFAULT_NOTION_DATE_TIMEZONE: TimeZone = "America/Sao_Paulo";

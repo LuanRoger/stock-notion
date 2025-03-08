@@ -12,7 +12,7 @@ export function onServerStarts(info: AddressInfo) {
 }
 
 export async function onServerCloses() {
-  console.log(APP_MESSAGES.CLOSSING_RABBIT_MQ_CONNECTION);
+  console.log(APP_MESSAGES.CLOSSING_REDIS_CONNECTION);
 
   await redisClient.quit();
 
