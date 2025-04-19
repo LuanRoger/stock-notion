@@ -38,7 +38,7 @@ const SECTIONS_CONFIG: Record<OrderKeys, SectionConfig> = {
   },
   [DEFAULT_HOW_TO_USE_SECTION_KEY]: {
     title: "Como usar",
-    collapsible: false,
+    collapsible: true,
     icon: <BookOpenIcon size={18} />,
     component: HowToUseSection,
   },
