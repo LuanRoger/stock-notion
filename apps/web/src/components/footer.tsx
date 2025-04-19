@@ -17,8 +17,15 @@ export default function Footer() {
           Política de privacidade
         </FooterLink>
         <FooterLink href="/terms/use-terms">Termos de uso</FooterLink>
-        <FooterLink href="">Template</FooterLink>
-        <FooterLink href="">Perfil do criador</FooterLink>
+        <FooterLink
+          href="https://www.notion.com/pt/templates/stock-base"
+          target="_blank"
+        >
+          Template
+        </FooterLink>
+        <FooterLink href="https://www.notion.com/pt/@luanroger" target="_blank">
+          Perfil do criador
+        </FooterLink>
       </div>
 
       <div className="flex items-center self-end gap-2">
