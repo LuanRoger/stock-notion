@@ -6,21 +6,21 @@
     "build": "webpack -c ./webpack.config.js"
   },
   "dependencies": {
-    "@hono/node-server": "^1.13.8",
+    "@hono/node-server": "^1.14.1",
     "@hono/zod-validator": "^0.4.3",
-    "@notionhq/client": "^2.2.16",
+    "@notionhq/client": "^2.3.0",
     "@repo/shared": "*",
-    "hono": "^4.7.2",
-    "ioredis": "^5.6.0",
+    "hono": "^4.7.7",
+    "ioredis": "^5.6.1",
     "node-html-parser": "^7.0.1",
     "redis": "^4.7.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.14.1",
     "ts-loader": "^9.5.2",
-    "tsx": "^4.7.1",
-    "typescript": "^5.7.3",
-    "webpack": "^5.98.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.6",
     "webpack-cli": "^6.0.1"
   }
 }
