@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "^0.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "exports": {
     "./models": "./src/models/index.ts",
