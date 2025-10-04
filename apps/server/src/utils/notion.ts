@@ -1,11 +1,11 @@
 import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants";
 import type { PageProperty } from "@/models/properties-options";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";
-import type { NotionPageOrDatabase } from "@/types";
+import type { NotionPageOrDataSource } from "@/types";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export function isValidPage(
-  page: NotionPageOrDatabase,
+  page: NotionPageOrDataSource,
   rowIdColumnName: string
 ): page is PageObjectResponse {
   if (page.object !== "page") {

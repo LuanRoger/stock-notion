@@ -1,7 +1,7 @@
 export { getFiByIdValidator } from "./fis";
 export {
-  notionDatabaseIdValidator,
-  updateDatabaseFiisPropertiesValidator,
-  notionDatabaseIdTicketValidator,
-  updateDatabaseFiisPropertiesHeadersValidator,
+  notionDataSourceIdValidator,
+  updateDataSourceFiisPropertiesValidator,
+  notionDataSourceIdTicketValidator,
+  updateDataSourceFiisPropertiesHeadersValidator,
 } from "./notion";

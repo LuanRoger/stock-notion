@@ -1,7 +1,7 @@
 import type { TimeZone } from "../types";
 
-export interface UpdateNotionDatabaseFiMessage {
-  databaseId: string;
+export interface UpdateNotionDataSourceFiMessage {
+  dataSourceId: string;
   rowIdColumnName?: string;
   actualValue?: string;
   dividendYield?: string;

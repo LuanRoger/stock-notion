@@ -1,37 +1,40 @@
 import {
   DEFAULT_NOTION_COLUMN_ID_NAME,
-  NOTION_DATABASE_FI_CHANNEL,
+  NOTION_DATA_SOURCE_FI_CHANNEL,
 } from "@/constants";
-import type { UpdateNotionDatabaseFiMessage } from "@repo/shared/models";
+import type { UpdateNotionDataSourceFiMessage } from "@repo/shared/models";
 import { subscribeToChannel } from "@/services/channel";
 import { createNotionClient } from ".";
-import { updateDatabaseFiisPageProperties } from "@/use-casses/notion";
+import { updateDataSourceFiisPageProperties } from "@/use-casses/notion";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 
-export function subscribeNotionDatabaseFi() {
-  subscribeToChannel<UpdateNotionDatabaseFiMessage>(
-    NOTION_DATABASE_FI_CHANNEL,
-    updateNotionDatabaseFi
+export function subscribeNotionDataSourceFi() {
+  subscribeToChannel<UpdateNotionDataSourceFiMessage>(
+    NOTION_DATA_SOURCE_FI_CHANNEL,
+    updateNotionDataSourceFi
   );
 }
 
-async function updateNotionDatabaseFi(message: UpdateNotionDatabaseFiMessage) {
+async function updateNotionDataSourceFi(
+  message: UpdateNotionDataSourceFiMessage
+) {
   const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
   if (!notionSecret) {
     return;
   }
 
   const notionClient = createNotionClient(notionSecret);
-  const { databaseId, rowIdColumnName, timeZone, ...databaseColumns } = message;
-  const databasePropertiesName =
-    Object.keys(databaseColumns).length !== 0 ? databaseColumns : undefined;
+  const { dataSourceId, rowIdColumnName, timeZone, ...dataSourceColumns } =
+    message;
+  const dataSourcePropertiesName =
+    Object.keys(dataSourceColumns).length !== 0 ? dataSourceColumns : undefined;
   const reduceOptions: NotionReducePropertiesOptions = { timeZone };
 
-  await updateDatabaseFiisPageProperties(
+  await updateDataSourceFiisPageProperties(
     notionClient,
-    databaseId,
+    dataSourceId,
     rowIdColumnName ?? DEFAULT_NOTION_COLUMN_ID_NAME,
-    databasePropertiesName,
+    dataSourcePropertiesName,
     reduceOptions
   );
 }

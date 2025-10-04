@@ -5,15 +5,17 @@ import { createFilterByRowId, isValidPage } from "@/utils/notion";
 import { lower } from "@/utils/string";
 import { type NotionReducePropertiesOptions } from "@repo/shared/models";
 
-export async function getDatabaseRowIds(
+export async function getDataSourceRowIds(
   client: Client,
-  databaseId: string,
+  dataSourceId: string,
   rowIdColumnName: string
 ) {
-  const database = await client.databases.query({ database_id: databaseId });
+  const dataSource = await client.dataSources.query({
+    data_source_id: dataSourceId,
+  });
 
   const rowIds: string[] = [];
-  for (const page of database.results) {
+  for (const page of dataSource.results) {
     const isValid = isValidPage(page, rowIdColumnName);
     if (!isValid) {
       continue;
@@ -31,22 +33,22 @@ export async function getDatabaseRowIds(
   return rowIds;
 }
 
-export async function updateDatabasePageProperties(
+export async function updateDataSourcePageProperties(
   client: Client,
-  databaseId: string,
+  dataSourceId: string,
   properties: PropertiesOptions,
   reduceOptions?: NotionReducePropertiesOptions
 ) {
   const { rowIdColumnName, properties: pageProperties } = properties;
   const pagesIdFilter = createFilterByRowId(rowIdColumnName, pageProperties);
-  const database = await client.databases.query({
-    database_id: databaseId,
+  const dataSource = await client.dataSources.query({
+    data_source_id: dataSourceId,
     filter: {
       or: pagesIdFilter,
     },
   });
 
-  for (const page of database.results) {
+  for (const page of dataSource.results) {
     const isValid = isValidPage(page, rowIdColumnName);
     if (!isValid) {
       continue;

@@ -1,29 +1,29 @@
 import { zValidator } from "@hono/zod-validator";
 import {
-  updateDatabaseFiisPropertiesSchema,
-  notionDatabaseIdSchema,
+  updateDataSourceFiisPropertiesSchema,
+  notionDataSourceIdSchema,
 } from "./schemas";
 import {
-  updateDatabaseFiisPropertiesHeadersSchema,
-  updateDatabaseFiTicketSchema,
+  updateDataSourceFiisPropertiesHeadersSchema,
+  updateDataSourceFiTicketSchema,
 } from "./schemas/notion";
 
-export const notionDatabaseIdValidator = zValidator(
+export const notionDataSourceIdValidator = zValidator(
   "param",
-  notionDatabaseIdSchema
+  notionDataSourceIdSchema
 );
 
-export const notionDatabaseIdTicketValidator = zValidator(
+export const notionDataSourceIdTicketValidator = zValidator(
   "param",
-  updateDatabaseFiTicketSchema
+  updateDataSourceFiTicketSchema
 );
 
-export const updateDatabaseFiisPropertiesValidator = zValidator(
+export const updateDataSourceFiisPropertiesValidator = zValidator(
   "json",
-  updateDatabaseFiisPropertiesSchema
+  updateDataSourceFiisPropertiesSchema
 );
 
-export const updateDatabaseFiisPropertiesHeadersValidator = zValidator(
+export const updateDataSourceFiisPropertiesHeadersValidator = zValidator(
   "header",
-  updateDatabaseFiisPropertiesHeadersSchema
+  updateDataSourceFiisPropertiesHeadersSchema
 );

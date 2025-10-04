@@ -1,6 +1,6 @@
 export { getFiByIdSchema as getFiiByIdSchema } from "./fis";
 export {
   textOrNumberSchema,
-  updateDatabaseFiisPropertiesSchema,
-  notionDatabaseIdSchema,
+  updateDataSourceFiisPropertiesSchema,
+  notionDataSourceIdSchema,
 } from "./notion";
