@@ -10,34 +10,34 @@ import {
   FormMessage,
 } from "./ui/form";
 import {
-  NotionDatabase,
-  notionDatabaseSchema,
+  NotionDataSource,
+  notionDataSourceeSchema,
 } from "@/utils/schemas/forms/notion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./ui/input";
 import { cn } from "@/utils/tailwind";
-import DatabaseIdInfoIcon from "./database-id-info-icon";
+import DataSourceIdInfoIcon from "./data-source-id-info-icon";
 import { useState } from "react";
 import LoadingButton from "./loading-button";
 import { sendStockMessage } from "@/app/actions/channel";
 import { showErrorToast, showToast } from "@/utils/toast";
 
-interface NotionDatabaseFormProps {
+interface NotionDataSourceFormProps {
   className?: string;
 }
 
-export default function NotionDatabaseForm({
+export default function NotionDataSourceForm({
   className,
-}: NotionDatabaseFormProps) {
-  const form = useForm<NotionDatabase>({
-    resolver: zodResolver(notionDatabaseSchema),
+}: NotionDataSourceFormProps) {
+  const form = useForm<NotionDataSource>({
+    resolver: zodResolver(notionDataSourceeSchema),
     defaultValues: {
-      databaseId: "",
+      dataSourceId: "",
     },
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(data: NotionDatabase) {
+  async function handleSubmit(data: NotionDataSource) {
     try {
       setIsLoading(true);
       const actionResult = await sendStockMessage(data);
@@ -66,13 +66,13 @@ export default function NotionDatabaseForm({
         className={cn("flex flex-col gap-4", className)}
       >
         <FormField
-          name="databaseId"
+          name="dataSourceId"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="inline-flex items-center gap-2">
-                Notion Databse ID
-                <DatabaseIdInfoIcon />
+                Notion Data Source ID
+                <DataSourceIdInfoIcon />
               </FormLabel>
               <FormControl>
                 <Input {...field} />

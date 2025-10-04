@@ -6,15 +6,15 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 
-interface DatabaseIdInfoIconProps {
+interface DataSourceIdInfoIconProps {
   className?: string;
   iconSize?: number;
 }
 
-export default function DatabaseIdInfoIcon({
+export default function DataSourceIdInfoIcon({
   className,
   iconSize = 16,
-}: DatabaseIdInfoIconProps) {
+}: DataSourceIdInfoIconProps) {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -23,8 +23,10 @@ export default function DatabaseIdInfoIcon({
         </TooltipTrigger>
         <TooltipContent>
           <p>
-            Ache o ID do banco de dados do Notion na URL do banco de dados:
-            notion.so/username/database-id
+            Para obter um ID de fonte de dados diretamente do aplicativo Notion,
+            o menu de configurações de um banco de dados inclui um botão
+            &quot;Copiar ID de fonte de dados&quot; em &quot;Gerenciar fontes de
+            dados&quot;:
           </p>
         </TooltipContent>
       </Tooltip>

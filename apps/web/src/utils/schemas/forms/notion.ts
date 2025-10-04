@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { stringSchema } from "../commons";
 
-export const notionDatabaseSchema = z.object({
-  databaseId: stringSchema,
+export const notionDataSourceeSchema = z.object({
+  dataSourceId: stringSchema,
 });
 
 export const notionSettingsSchema = z.object({
@@ -19,5 +19,5 @@ export const notionSettingsSchema = z.object({
   nextYieldDate: z.string().optional(),
 });
 
-export type NotionDatabase = z.infer<typeof notionDatabaseSchema>;
+export type NotionDataSource = z.infer<typeof notionDataSourceeSchema>;
 export type NotionSettings = z.infer<typeof notionSettingsSchema>;

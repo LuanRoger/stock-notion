@@ -31,7 +31,7 @@ export default function PrivacyPoliciesPage() {
         Essas informações são usadas para melhorar a qualidade do serviço
         oferecido e para entender melhor o comportamento dos usuários.
         <br />
-        Não coletamos informações de banco de dados do Notion, bem como não
+        Não coletamos informações de banco de dados ou fontes de dados do Notion, bem como não
         armazena informações de login relacionada ao Notion.
         <br />O Stock não compartilha informações pessoais com terceiros, exceto
         em casos onde a lei exige.

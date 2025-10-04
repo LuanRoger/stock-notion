@@ -3,10 +3,10 @@
 import {
   DEFAULT_FAQ_SECTION_KEY,
   DEFAULT_HOW_TO_USE_SECTION_KEY,
-  DEFAULT_NOTION_DATABASE_SECTION_KEY,
+  DEFAULT_NOTION_DATA_SOURCE_SECTION_KEY,
   DEFAULT_NOTION_SETTINGS_SECTION_KEY,
 } from "@/constants";
-import NotionDatabaseForm from "./notion-database-form";
+import NotionDataSourceForm from "./notion-data-source-form";
 import SectionWrapper from "./section-wrapper";
 import { BookOpenIcon, CircleHelpIcon, SettingsIcon } from "lucide-react";
 import NotionSettingsForm from "./notion-settings-form";
@@ -24,11 +24,11 @@ interface SectionConfig {
 }
 
 const SECTIONS_CONFIG: Record<OrderKeys, SectionConfig> = {
-  [DEFAULT_NOTION_DATABASE_SECTION_KEY]: {
-    title: "Banco de dados do Notion",
+  [DEFAULT_NOTION_DATA_SOURCE_SECTION_KEY]: {
+    title: "Fonte de dados do Notion",
     collapsible: false,
     icon: null,
-    component: NotionDatabaseForm,
+    component: NotionDataSourceForm,
   },
   [DEFAULT_NOTION_SETTINGS_SECTION_KEY]: {
     title: "Configuração dos campos",
