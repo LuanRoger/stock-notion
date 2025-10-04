@@ -1,7 +1,7 @@
 import {
-  getDatabaseRowIds,
-  updateDatabasePageProperties,
-} from "@/modules/notion/database";
+  getDataSourceRowIds,
+  updateDataSourcePageProperties,
+} from "@/modules/notion/data-source";
 import { Client } from "@notionhq/client";
 import { getFiById } from "../status-invest/fiis";
 import { getFiagroById } from "../status-invest/fiagro";
@@ -16,15 +16,15 @@ import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 import { FiNotFound } from "@/models/errors";
 import { mergePropertiesNameOption } from "@/utils/object";
 
-export async function updateDatabaseFiisPageProperties(
+export async function updateDataSourceFiisPageProperties(
   client: Client,
-  databaseId: string,
+  dataSourceId: string,
   rowIdColumnName: string,
   propertiesNameOption?: PropertiesNameOption,
   reduceOptions?: NotionReducePropertiesOptions
 ) {
-  const fis = await getDatabaseRowIds(client, databaseId, rowIdColumnName);
-  const databasePropertiesName =
+  const fis = await getDataSourceRowIds(client, dataSourceId, rowIdColumnName);
+  const dataSourcePropertiesName =
     mergePropertiesNameOption(propertiesNameOption);
 
   const properties: Properties = {};
@@ -32,13 +32,13 @@ export async function updateDatabaseFiisPageProperties(
     const fiId = lower(fi);
     try {
       const fiData = await getFiById(fiId);
-      properties[fiId] = fiiDataToPageProperty(fiData, databasePropertiesName);
+      properties[fiId] = fiiDataToPageProperty(fiData, dataSourcePropertiesName);
     } catch (error) {
       if (!(error instanceof FiNotFound)) {
         throw error;
       }
       const fiagro = await getFiagroById(fiId);
-      properties[fiId] = fiiDataToPageProperty(fiagro, databasePropertiesName);
+      properties[fiId] = fiiDataToPageProperty(fiagro, dataSourcePropertiesName);
     }
   }
 
@@ -46,17 +46,17 @@ export async function updateDatabaseFiisPageProperties(
     rowIdColumnName,
     properties,
   };
-  await updateDatabasePageProperties(
+  await updateDataSourcePageProperties(
     client,
-    databaseId,
+    dataSourceId,
     propertiesOptions,
     reduceOptions
   );
 }
 
-export async function updateDatabaseFiTicketPageProperties(
+export async function updateDataSourceFiTicketPageProperties(
   client: Client,
-  databaseId: string,
+  dataSourceId: string,
   rowIdColumnName: string,
   ticket: string,
   propertiesNameOption?: PropertiesNameOption,
@@ -77,9 +77,9 @@ export async function updateDatabaseFiTicketPageProperties(
     rowIdColumnName,
     properties,
   };
-  await updateDatabasePageProperties(
+  await updateDataSourcePageProperties(
     client,
-    databaseId,
+    dataSourceId,
     propertiesOptions,
     reduceOptions
   );

@@ -20,9 +20,9 @@ export const textOrNumberSchema = z.union([
   }),
 ]);
 
-export const updateDatabaseFiisPropertiesSchema = z.object({
+export const updateDataSourceFiisPropertiesSchema = z.object({
   rowIdColumnName: stringSchema.optional(),
-  databaseColumns: z
+  dataSourceColumns: z
     .object({
       actualValue: stringSchema,
       dividendYield: stringSchema,
@@ -38,19 +38,19 @@ export const updateDatabaseFiisPropertiesSchema = z.object({
     .optional(),
 });
 
-export const notionDatabaseIdSchema = z.object({
-  databaseId: stringSchema,
+export const notionDataSourceIdSchema = z.object({
+  dataSourceId: stringSchema,
 });
 
 export const fiTicketSchema = z.object({
   ticket: fiSchema,
 });
 
-export const updateDatabaseFiTicketSchema = z.object({
+export const updateDataSourceFiTicketSchema = z.object({
   ...fiTicketSchema.shape,
-  ...notionDatabaseIdSchema.shape,
-})
+  ...notionDataSourceIdSchema.shape,
+});
 
-export const updateDatabaseFiisPropertiesHeadersSchema = z.object({
+export const updateDataSourceFiisPropertiesHeadersSchema = z.object({
   TimeZone: z.enum(timeZoneValues).optional(),
 });

@@ -1,12 +1,12 @@
 import { APP_MESSAGES } from "@/constants";
-import { subscribeNotionDatabaseFi } from "@/modules/notion/channel";
+import { subscribeNotionDataSourceFi } from "@/modules/notion/channel";
 import { redisClient } from "@/services/redis";
 import type { AddressInfo } from "node:net";
 
 export function onServerStarts(info: AddressInfo) {
   const { port } = info;
 
-  subscribeNotionDatabaseFi();
+  subscribeNotionDataSourceFi();
 
   console.log(`Server started on port ${port}`);
 }
