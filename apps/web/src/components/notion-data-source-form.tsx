@@ -21,6 +21,8 @@ import { useState } from "react";
 import LoadingButton from "./loading-button";
 import { sendStockMessage } from "@/app/actions/channel";
 import { showErrorToast, showToast } from "@/utils/toast";
+import { appendToLocalStorageArray } from "@/utils/local-storage";
+import { DATA_SOURCE_HISTORY_KEY } from "@/constants/local-storage";
 
 interface NotionDataSourceFormProps {
   className?: string;
@@ -42,6 +44,7 @@ export default function NotionDataSourceForm({
       setIsLoading(true);
       const actionResult = await sendStockMessage(data);
       if (actionResult.success) {
+        appendToLocalStorageArray(DATA_SOURCE_HISTORY_KEY, data.dataSourceId);
         showToast("Atualização requisitada com sucesso");
       } else {
         showErrorToast("Um erro ocorreu", actionResult.error);
