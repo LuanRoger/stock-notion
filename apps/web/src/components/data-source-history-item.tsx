@@ -22,9 +22,12 @@ export function DataSourceHistoryItem({
             text={dataSourceId}
             tooltipText="Copiar ID da fonte de dados"
             buttonProps={{ variant: "ghost", size: "icon" }}
-            clicked={{ tooltipText: "Copiado!", children: <CheckIcon /> }}
+            clicked={{
+              tooltipText: "Copiado!",
+              children: <CheckIcon className="animate-in fade-in zoom-in" />,
+            }}
           >
-            <CopyIcon />
+            <CopyIcon className="animate-in fade-in zoom-in" />
           </CopyTextButton>
         </ItemActions>
       </Item>

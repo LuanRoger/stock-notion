@@ -49,7 +49,7 @@ export function CopyTextButton({
   const buttonContent = useMemo(() => {
     return (
       <Button onClick={() => copyToClipboard(text)} {...buttonProps}>
-        {changeToClickedState ? clicked!.children : children}
+          {changeToClickedState ? clicked!.children : children}
       </Button>
     );
   }, [
