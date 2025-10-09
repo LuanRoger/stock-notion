@@ -15,8 +15,8 @@ export function NotionDataSourceHistory() {
   }, []);
 
   return (
-    <div>
-      <span className="inline-flex gap-1 items-center text-muted-foreground">
+    <div className="flex flex-col gap-4">
+      <span className="inline-flex gap-1 items-center">
         <HistoryIcon size={18} />
         <h3>Historico</h3>
       </span>
