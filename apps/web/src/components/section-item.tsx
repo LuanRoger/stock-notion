@@ -6,7 +6,6 @@ import {
   DEFAULT_NOTION_DATA_SOURCE_SECTION_KEY,
   DEFAULT_NOTION_SETTINGS_SECTION_KEY,
 } from "@/constants";
-import NotionDataSourceForm from "./notion-data-source-form";
 import SectionWrapper from "./section-wrapper";
 import { BookOpenIcon, CircleHelpIcon, SettingsIcon } from "lucide-react";
 import NotionSettingsForm from "./notion-settings-form";
@@ -15,6 +14,7 @@ import { DragControls, Reorder, useDragControls } from "motion/react";
 import { OrderKeys } from "@/types/order";
 import { ReactNode } from "react";
 import FaqSection from "./faq-section";
+import { UpdateNotionSection } from "./update-notion-section";
 
 interface SectionConfig {
   title: string;
@@ -28,7 +28,7 @@ const SECTIONS_CONFIG: Record<OrderKeys, SectionConfig> = {
     title: "Fonte de dados do Notion",
     collapsible: false,
     icon: null,
-    component: NotionDataSourceForm,
+    component: UpdateNotionSection,
   },
   [DEFAULT_NOTION_SETTINGS_SECTION_KEY]: {
     title: "Configuração dos campos",
