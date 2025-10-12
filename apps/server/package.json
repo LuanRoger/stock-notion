@@ -1,19 +1,19 @@
 {
   "name": "server",
   "scripts": {
-    "start": "node dist/bundle.js",
-    "dev": "tsx watch --env-file=.env src/index.ts",
-    "build": "webpack -c ./webpack.config.js"
+    "start": "bun run dist/index.js",
+    "dev": "bun run --hot src/index.ts",
+    "build": "bun build src/index.ts --outdir dist"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.5",
     "@hono/zod-validator": "^0.7.3",
     "@notionhq/client": "^5.1.0",
     "@repo/shared": "*",
     "hono": "^4.9.9",
     "ioredis": "^5.8.0",
     "node-html-parser": "^7.0.1",
-    "redis": "^5.8.3"
+    "redis": "^5.8.3",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^22.18.8",
