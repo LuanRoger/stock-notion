@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import type { Env } from "./types";
 import { FiisRoutes, FiagroRoutes, NotionRoutes } from "./routes";
 import { logger } from "hono/logger";
-import { onServerCloses, onServerStarts } from "./utils/server";
+import { onServerStarts } from "./utils/server";
 import { DEFAULT_PORT } from "./constants";
 import { parseNumber } from "./utils/numbers";
 
@@ -14,7 +14,6 @@ app.route("/fiis", FiisRoutes);
 app.route("/fiagro", FiagroRoutes);
 app.route("/modules/notion", NotionRoutes);
 
-process.on("SIGTERM", onServerCloses);
 export default {
   fetch: app.fetch,
   port: parseNumber(process.env.PORT) ?? DEFAULT_PORT,
