@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "bun run --bun next dev --turbopack",
-    "build": "bun run --bun next build",
+    "build": "bun run --bun next build --turbopack",
     "start": "bun run --bun next start",
     "lint": "next lint"
   },
