@@ -14,8 +14,10 @@ app.route("/fiis", FiisRoutes);
 app.route("/fiagro", FiagroRoutes);
 app.route("/modules/notion", NotionRoutes);
 
+const port = parseNumber(process.env.PORT) ?? DEFAULT_PORT;
+onServerStarts();
+
 export default {
   fetch: app.fetch,
-  port: parseNumber(process.env.PORT) ?? DEFAULT_PORT,
-  onServerStarts,
+  port,
 };

@@ -1,11 +1,15 @@
-import { redis } from "bun";
+import { subscriberRedisClient } from "./redis";
 
 export function subscribeToChannel<T>(
   channelName: string,
   callback: (message: T) => Promise<void>
 ) {
-  redis.subscribe(channelName, async (message) => {
+  subscriberRedisClient.subscribe(channelName, async (message, channel) => {
+    console.log(`Received message on channel ${channel}: ${message}`);
+
     const parsedMessage = JSON.parse(message) as T;
     await callback(parsedMessage);
   });
+
+  console.log(`Subscribed to channel ${channelName}`);
 }
