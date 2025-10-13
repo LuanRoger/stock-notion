@@ -1,7 +1,7 @@
 import type { FiData } from "../fi";
-import {
-  type PageProperty,
-  type PropertiesNameOption,
+import type {
+  PageProperty,
+  PropertiesNameOption,
 } from "../properties-options";
 
 export function fiiDataToPageProperty(

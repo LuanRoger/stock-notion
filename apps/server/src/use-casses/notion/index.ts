@@ -7,7 +7,7 @@ import { getFiById } from "../status-invest/fiis";
 import { getFiagroById } from "../status-invest/fiagro";
 import type {
   Properties,
-  PropertiesNameOption,
+  PropertiesNameOptionRequest,
   PropertiesOptions,
 } from "@/models/properties-options";
 import { fiiDataToPageProperty } from "@/models/mappers/properties";
@@ -20,7 +20,7 @@ export async function updateDataSourceFiisPageProperties(
   client: Client,
   dataSourceId: string,
   rowIdColumnName: string,
-  propertiesNameOption?: PropertiesNameOption,
+  propertiesNameOption?: PropertiesNameOptionRequest,
   reduceOptions?: NotionReducePropertiesOptions
 ) {
   const fis = await getDataSourceRowIds(client, dataSourceId, rowIdColumnName);
@@ -59,7 +59,7 @@ export async function updateDataSourceFiTicketPageProperties(
   dataSourceId: string,
   rowIdColumnName: string,
   ticket: string,
-  propertiesNameOption?: PropertiesNameOption,
+  propertiesNameOption?: PropertiesNameOptionRequest,
   reduceOptions?: NotionReducePropertiesOptions
 ) {
   const fiTicket = lower(ticket);

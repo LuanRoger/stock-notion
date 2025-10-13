@@ -22,11 +22,14 @@ export async function getDataSourceRowIds(
     }
 
     const rowIdProperty = page.properties[rowIdColumnName];
-    if (rowIdProperty.type !== "title") {
+    if (rowIdProperty?.type !== "title") {
       continue;
     }
 
-    const rowIdText = rowIdProperty.title[0].plain_text;
+    const rowIdText = rowIdProperty.title[0]?.plain_text;
+    if (!rowIdText) {
+      continue;
+    }
     rowIds.push(rowIdText);
   }
 
@@ -54,12 +57,21 @@ export async function updateDataSourcePageProperties(
       continue;
     }
 
-    if (page.properties[rowIdColumnName].type !== "title") {
+    if (page.properties[rowIdColumnName]?.type !== "title") {
       continue;
     }
 
-    const rowId = lower(page.properties[rowIdColumnName].title[0].plain_text);
+    const firstTitle = page.properties[rowIdColumnName].title[0];
+    if (!firstTitle) {
+      continue;
+    }
+
+    const rowId = lower(firstTitle.plain_text);
     const pagePropertiesToUpdate = pageProperties[rowId];
+    if (!pagePropertiesToUpdate) {
+      continue;
+    }
+
     await updatePageProperty(
       client,
       page.id,
