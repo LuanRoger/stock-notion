@@ -7,7 +7,7 @@ import { createCacheKey } from "@/utils/cache";
 import { parseFiPage } from "@/utils/status-invest/html-parser";
 
 export async function getFiagroById(id: string) {
-  let fiData: FiData;
+  let fiData: FiData | null = null;
   const cacheKey = createCacheKey(FIAGRO_STORE_KEY, id);
   fiData = await getValueCache<FiData>(cacheKey);
   if (fiData) {

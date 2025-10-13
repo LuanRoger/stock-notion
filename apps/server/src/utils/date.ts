@@ -4,7 +4,14 @@ export function parseDate(value: string | undefined): Date | undefined {
   }
 
   const [day, month, year] = value.split("/").map((v) => parseInt(v));
-  if (isNaN(day) || isNaN(month) || isNaN(year)) {
+  const isDateUndefined =
+    day === undefined || month === undefined || year === undefined;
+  if (isDateUndefined) {
+    return undefined;
+  }
+
+  const isAnyDatePartNaN = isNaN(day) || isNaN(month) || isNaN(year);
+  if (isDateUndefined || isAnyDatePartNaN) {
     return undefined;
   }
 

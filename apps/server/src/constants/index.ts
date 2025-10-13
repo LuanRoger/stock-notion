@@ -1,4 +1,4 @@
-import { type PropertiesNameOption } from "@/models/properties-options";
+import type { PropertiesNameOption } from "@/models/properties-options";
 import { type TimeZone } from "@repo/shared/types";
 
 export { NOTION_DATA_SOURCE_FI_CHANNEL } from "./queue";

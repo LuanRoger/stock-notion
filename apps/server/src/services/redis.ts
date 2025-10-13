@@ -1,5 +1,5 @@
 import { APP_MESSAGES } from "@/constants";
-import Redis from "ioredis";
+import { RedisClient } from "bun";
 
 export function initRedis() {
   const connectionString = process.env.REDIS_URL;
@@ -7,7 +7,7 @@ export function initRedis() {
     console.log(APP_MESSAGES.REDIS_CONNECTION_STRING_NOT_SET);
   }
 
-  const client = new Redis(connectionString);
+  const client = new RedisClient(connectionString);
 
   return client;
 }

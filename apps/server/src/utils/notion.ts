@@ -14,7 +14,7 @@ export function isValidPage(
 
   const properPage = page as PageObjectResponse;
   const rowIdProperty = properPage.properties[rowIdColumnName];
-  if (rowIdProperty.type !== "title") {
+  if (rowIdProperty?.type !== "title") {
     return false;
   }
 

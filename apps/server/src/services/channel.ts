@@ -4,21 +4,12 @@ export function subscribeToChannel<T>(
   channelName: string,
   callback: (message: T) => Promise<void>
 ) {
-  subscriberRedisClient.subscribe(channelName, async (error, _) => {
-    if (error) {
-      console.error("Error on subscriber: ", error);
-      return;
-    }
-
-    console.log(`Subscribed to ${channelName} subscriber`);
-  });
-
-  subscriberRedisClient.on("message", async (channel, message) => {
-    if (channel !== channelName) {
-      return;
-    }
+  subscriberRedisClient.subscribe(channelName, async (message, channel) => {
+    console.log(`Received message on channel ${channel}: ${message}`);
 
     const parsedMessage = JSON.parse(message) as T;
     await callback(parsedMessage);
   });
+
+  console.log(`Subscribed to channel ${channelName}`);
 }

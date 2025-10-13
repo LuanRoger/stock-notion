@@ -13,6 +13,7 @@ export function subscribeNotionDataSourceFi() {
     NOTION_DATA_SOURCE_FI_CHANNEL,
     updateNotionDataSourceFi
   );
+  console.log("Notion Data Source FI subscriber initialized");
 }
 
 async function updateNotionDataSourceFi(

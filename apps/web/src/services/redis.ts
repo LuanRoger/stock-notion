@@ -1,11 +1,7 @@
-import { EnvVariableNotSetError } from "@/models/errors";
-import Redis from "ioredis";
+import { redis } from "bun";
 
-export function createRedisClient() {
-  const redisUrl = process.env.REDIS_URL;
-  if (!redisUrl) {
-    throw new EnvVariableNotSetError("REDIS_URL");
-  }
+export async function publishToChannel(exchange: string, message: unknown) {
+  const jsonMessage = JSON.stringify(message);
 
-  return new Redis(redisUrl);
+  await redis.publish(exchange, jsonMessage);
 }

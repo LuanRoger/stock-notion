@@ -19,7 +19,7 @@ export type PageProperty =
 
 export type Properties = Record<string, PageProperty[]>;
 
-export interface PropertiesNameOption {
+export interface PropertiesNameOptionRequest {
   actualValue?: string;
   dividendYield?: string;
   pvp?: string;
@@ -32,3 +32,5 @@ export interface PropertiesNameOption {
   nextYieldBasePrice?: string;
   nextYieldDate?: string;
 }
+
+export type PropertiesNameOption = Required<PropertiesNameOptionRequest>;
