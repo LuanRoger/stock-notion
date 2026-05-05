@@ -9,6 +9,7 @@
     "@hono/zod-validator": "^0.7.5",
     "@notionhq/client": "^5.4.0",
     "@repo/shared": "*",
+    "elysia": "^1.4.28",
     "hono": "^4.10.8",
     "node-html-parser": "^7.0.1",
     "zod": "^4.1.13"

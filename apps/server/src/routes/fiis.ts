@@ -1,23 +1,24 @@
 import { getFiById as getFiiByIdStatusInvest } from "@/use-casses/status-invest/fiis";
 import { FiNotFound } from "@/models/errors";
-import { getFiByIdValidator } from "@/middlewares/validators";
-import { Hono } from "hono";
-import type { Env } from "@/types";
+import Elysia from "elysia";
+import { getFiByIdSchema } from "@/middlewares/validators/schemas/fis";
 
-const routes = new Hono<{ Bindings: Env }>();
+const app = new Elysia({ prefix: "/fiis" });
 
-routes.get("/:id", getFiByIdValidator, async (c) => {
-  const { id: fiiId } = c.req.valid("param");
+app.get("/:id", async ({ status, params }) => {
+  const { id: fiiId } = params;
 
   try {
     const fii = await getFiiByIdStatusInvest(fiiId);
 
-    return c.json(fii);
+    return status("OK", fii);
   } catch (e) {
     if (e instanceof FiNotFound) {
-      return c.notFound();
+      return status("Not Found");
     }
   }
+}, {
+  params: getFiByIdSchema
 });
 
-export default routes;
+export default app;
