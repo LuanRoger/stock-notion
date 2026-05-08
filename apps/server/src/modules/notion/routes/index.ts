@@ -6,7 +6,7 @@ import {
   updateDataSourceFiTicketPageProperties,
 } from "@/use-casses/notion";
 import Elysia from "elysia";
-import { notionDataSourceIdSchema, updateDataSourceFiisPropertiesHeadersSchema, updateDataSourceFiisPropertiesSchema, updateDataSourceFiTicketSchema } from "@/middlewares/validators/schemas/notion";
+import { notionDataSourceIdSchema, updateDataSourceFiisPropertiesHeadersSchema, updateDataSourceFiisPropertiesSchema, updateDataSourceFiTicketSchema } from "../schemas";
 
 const app = new Elysia({ prefix: "/module/notion" });
 
