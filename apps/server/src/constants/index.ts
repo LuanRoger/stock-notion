@@ -1,8 +1,6 @@
 import type { PropertiesNameOption } from "@/models/properties-options";
 import { type TimeZone } from "@repo/shared/types";
 
-export { NOTION_DATA_SOURCE_FI_CHANNEL } from "./queue";
-
 export const PROMISE_LIST_EXECUTION_DELAY_MS = 300;
 
 export const DEFAULT_PORT = 3001;
@@ -35,3 +33,7 @@ export const APP_MESSAGES = {
 };
 
 export const DEFAULT_NOTION_DATE_TIMEZONE: TimeZone = "America/Sao_Paulo";
+
+export const FI_STORE_KEY = "fi";
+export const FIAGRO_STORE_KEY = "fiagro";
+export const CACHE_DURATION = 60 * 30; // 30 minutes

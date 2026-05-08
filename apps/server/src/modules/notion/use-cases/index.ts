@@ -1,10 +1,10 @@
 import {
   getDataSourceRowIds,
   updateDataSourcePageProperties,
-} from "@/modules/notion/data-source";
+} from "@/services/notion/data-source";
 import { Client } from "@notionhq/client";
-import { getFiById } from "../status-invest/fiis";
-import { getFiagroById } from "../status-invest/fiagro";
+import { getFiById } from "@/use-casses/status-invest/fiis";
+import { getFiagroById } from "@/use-casses/status-invest/fiagro";
 import type {
   Properties,
   PropertiesNameOptionRequest,
@@ -21,7 +21,7 @@ export async function updateDataSourceFiisPageProperties(
   dataSourceId: string,
   rowIdColumnName: string,
   propertiesNameOption?: PropertiesNameOptionRequest,
-  reduceOptions?: NotionReducePropertiesOptions
+  reduceOptions?: NotionReducePropertiesOptions,
 ) {
   const fis = await getDataSourceRowIds(client, dataSourceId, rowIdColumnName);
   const dataSourcePropertiesName =
@@ -32,13 +32,19 @@ export async function updateDataSourceFiisPageProperties(
     const fiId = lower(fi);
     try {
       const fiData = await getFiById(fiId);
-      properties[fiId] = fiiDataToPageProperty(fiData, dataSourcePropertiesName);
+      properties[fiId] = fiiDataToPageProperty(
+        fiData,
+        dataSourcePropertiesName,
+      );
     } catch (error) {
       if (!(error instanceof FiNotFound)) {
         throw error;
       }
       const fiagro = await getFiagroById(fiId);
-      properties[fiId] = fiiDataToPageProperty(fiagro, dataSourcePropertiesName);
+      properties[fiId] = fiiDataToPageProperty(
+        fiagro,
+        dataSourcePropertiesName,
+      );
     }
   }
 
@@ -50,7 +56,7 @@ export async function updateDataSourceFiisPageProperties(
     client,
     dataSourceId,
     propertiesOptions,
-    reduceOptions
+    reduceOptions,
   );
 }
 
@@ -60,14 +66,14 @@ export async function updateDataSourceFiTicketPageProperties(
   rowIdColumnName: string,
   ticket: string,
   propertiesNameOption?: PropertiesNameOptionRequest,
-  reduceOptions?: NotionReducePropertiesOptions
+  reduceOptions?: NotionReducePropertiesOptions,
 ) {
   const fiTicket = lower(ticket);
   const fiData = await getFiById(ticket);
 
   const pageProperties = fiiDataToPageProperty(
     fiData,
-    mergePropertiesNameOption(propertiesNameOption)
+    mergePropertiesNameOption(propertiesNameOption),
   );
   const properties: Properties = {
     [fiTicket]: pageProperties,
@@ -81,6 +87,6 @@ export async function updateDataSourceFiTicketPageProperties(
     client,
     dataSourceId,
     propertiesOptions,
-    reduceOptions
+    reduceOptions,
   );
 }

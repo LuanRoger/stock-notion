@@ -1,4 +1,4 @@
-import { CACHE_DURATION } from "@/constants/cache";
+import { CACHE_DURATION } from "@/constants";
 import { dateReviver } from "@/utils/date";
 import { redisClient } from "./redis";
 

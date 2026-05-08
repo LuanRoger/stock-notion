@@ -13,5 +13,3 @@ export function initRedis() {
 }
 
 export const redisClient = initRedis();
-
-export const subscriberRedisClient = initRedis();

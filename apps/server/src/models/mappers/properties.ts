@@ -1,11 +1,11 @@
-import type { FiData } from "../fi";
+import type { FiiData } from "../fii";
 import type {
   PageProperty,
   PropertiesNameOption,
 } from "../properties-options";
 
 export function fiiDataToPageProperty(
-  value: FiData,
+  value: FiiData,
   options: PropertiesNameOption
 ): PageProperty[] {
   const properties: PageProperty[] = [];
