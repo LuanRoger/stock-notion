@@ -1,4 +1,4 @@
-import type { FiData } from "@/models/fi";
+import type { FiiData } from "@/models/fii";
 import {
   STATUS_INVEST_CLASS_SELECTORS,
   STATUS_INVEST_NOT_FOUND_PAGE_ELEMENT,
@@ -9,7 +9,7 @@ import { parseNumber } from "@/utils/numbers";
 import { FiNotFoundRule, FiParseError } from "@/models/errors";
 import type { HTMLElement } from "node-html-parser";
 
-export function parseFiPage(page: HTMLElement): FiData {
+export function parseFiPage(page: HTMLElement): FiiData {
   const name = page.querySelector(
     STATUS_INVEST_CLASS_SELECTORS.NAME
   )?.innerText;
@@ -83,7 +83,7 @@ export function parseFiPage(page: HTMLElement): FiData {
     nextYieldBasePriceParsed !== undefined &&
     nextYieldDateParsed !== undefined;
 
-  const fiiData: FiData = {
+  const fiiData: FiiData = {
     name,
     actualValue: parseNumber(actualValue) ?? 0,
     dividendYield: parseNumber(dividendYield) ?? 0,
