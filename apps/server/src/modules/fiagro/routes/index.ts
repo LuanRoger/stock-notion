@@ -1,5 +1,5 @@
-import { getFiByIdSchema } from "@/middlewares/validators/schemas/fis";
 import { FiNotFound } from "@/models/errors";
+import { getFiByIdSchema } from "@/shared/schemas";
 import { getFiagroById } from "@/use-casses/status-invest/fiagro";
 import Elysia from "elysia";
 

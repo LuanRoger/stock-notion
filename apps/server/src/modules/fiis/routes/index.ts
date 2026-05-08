@@ -1,7 +1,7 @@
 import { getFiById as getFiiByIdStatusInvest } from "@/use-casses/status-invest/fiis";
 import { FiNotFound } from "@/models/errors";
 import Elysia from "elysia";
-import { getFiByIdSchema } from "@/middlewares/validators/schemas/fis";
+import { getFiByIdSchema } from "@/shared/schemas";
 
 const app = new Elysia({ prefix: "/fiis" });
 

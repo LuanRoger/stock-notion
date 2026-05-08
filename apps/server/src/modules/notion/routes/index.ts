@@ -1,6 +1,6 @@
 import { APP_RESPONSES, DEFAULT_NOTION_COLUMN_ID_NAME } from "@/constants";
 import { type NotionReducePropertiesOptions } from "@repo/shared/models";
-import { createNotionClient } from "@/modules/notion";
+import { createNotionClient } from "@/services/notion";
 import {
   updateDataSourceFiisPageProperties,
   updateDataSourceFiTicketPageProperties,
@@ -70,7 +70,6 @@ app.post(
     params: notionDataSourceIdSchema,
     body: updateDataSourceFiisPropertiesSchema,
     headers: updateDataSourceFiisPropertiesHeadersSchema
-
   }
 );
 

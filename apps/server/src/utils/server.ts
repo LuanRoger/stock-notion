@@ -1,4 +1,4 @@
-import { subscribeNotionDataSourceFi } from "@/modules/notion/channel";
+import { subscribeNotionDataSourceFi } from "@/services/notion/channel";
 
 export function onServerStarts() {
   subscribeNotionDataSourceFi();

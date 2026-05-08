@@ -1,6 +1,6 @@
-import FiisRoutes from "./routes/fiis";
-import FiagroRoutes from "./routes/fiagro";
-import NotionRoutes from "./routes/notion";
+import FiisRoutes from "./modules/fiis/routes";
+import FiagroRoutes from "./modules/fiagro/routes";
+import NotionRoutes from "./modules/notion/routes";
 import { onServerStarts } from "./utils/server";
 import { DEFAULT_PORT } from "./constants";
 import { parseNumber } from "./utils/numbers";

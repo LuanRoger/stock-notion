@@ -1,7 +1,7 @@
 import {
   getDataSourceRowIds,
   updateDataSourcePageProperties,
-} from "@/modules/notion/data-source";
+} from "@/services/notion/data-source";
 import { Client } from "@notionhq/client";
 import { getFiById } from "../status-invest/fiis";
 import { getFiagroById } from "../status-invest/fiagro";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { fiSchema, numberSchema, stringSchema } from "./commons";
+import { fiSchema, numberSchema, stringSchema } from "@/shared/schemas";
 import { timeZoneValues } from "@repo/shared/types";
 
 export const textOrNumberSchema = z.union([
