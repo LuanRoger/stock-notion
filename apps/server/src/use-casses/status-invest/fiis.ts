@@ -1,4 +1,4 @@
-import { FI_STORE_KEY } from "@/constants/cache";
+import { FI_STORE_KEY } from "@/constants";
 import { FiHasInvalidData, FiNotFound, FiNotFoundRule } from "@/models/errors";
 import type { FiiData } from "@/models/fii";
 import { getFiiById as getFiiByIdStatusInvest } from "@/services";

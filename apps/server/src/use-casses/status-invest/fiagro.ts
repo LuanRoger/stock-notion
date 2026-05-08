@@ -1,4 +1,4 @@
-import { FIAGRO_STORE_KEY } from "@/constants/cache";
+import { FIAGRO_STORE_KEY } from "@/constants";
 import { FiHasInvalidData, FiNotFound, FiNotFoundRule } from "@/models/errors";
 import type { FiiData } from "@/models/fii";
 import { getFiagroById as getFiagroByIdStatusInvest } from "@/services";
