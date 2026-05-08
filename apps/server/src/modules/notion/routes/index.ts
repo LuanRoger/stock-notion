@@ -4,18 +4,23 @@ import { createNotionClient } from "@/services/notion";
 import {
   updateDataSourceFiisPageProperties,
   updateDataSourceFiTicketPageProperties,
-} from "@/use-casses/notion";
+} from "../use-cases";
 import Elysia from "elysia";
-import { notionDataSourceIdSchema, updateDataSourceFiisPropertiesHeadersSchema, updateDataSourceFiisPropertiesSchema, updateDataSourceFiTicketSchema } from "../schemas";
+import {
+  notionDataSourceIdSchema,
+  updateDataSourceFiisPropertiesHeadersSchema,
+  updateDataSourceFiisPropertiesSchema,
+  updateDataSourceFiTicketSchema,
+} from "../schemas";
 
 const app = new Elysia({ prefix: "/module/notion" });
 
 app.post(
   ":dataSourceId/:ticket",
   async ({ status, params, headers, body }) => {
-    const notionSecret = process.env.NOTION_INTEGRATION_SECRET
+    const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
-      return status("Internal Server Error", APP_RESPONSES.SECRET_NOT_SET)
+      return status("Internal Server Error", APP_RESPONSES.SECRET_NOT_SET);
     }
 
     const notionClient = createNotionClient(notionSecret);
@@ -30,7 +35,7 @@ app.post(
       rowIdColumnName ?? DEFAULT_NOTION_COLUMN_ID_NAME,
       ticket,
       dataSourceColumns,
-      reduceOptions
+      reduceOptions,
     );
 
     return status("No Content");
@@ -38,14 +43,14 @@ app.post(
   {
     params: updateDataSourceFiTicketSchema,
     body: updateDataSourceFiisPropertiesSchema,
-    headers: updateDataSourceFiisPropertiesHeadersSchema
-  }
+    headers: updateDataSourceFiisPropertiesHeadersSchema,
+  },
 );
 
 app.post(
   ":dataSourceId",
   async ({ status, params, body, headers }) => {
-    const notionSecret = process.env.NOTION_INTEGRATION_SECRET
+    const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
       return status("Internal Server Error", APP_RESPONSES.SECRET_NOT_SET);
     }
@@ -61,7 +66,7 @@ app.post(
       dataSourceId,
       rowIdColumnName ?? DEFAULT_NOTION_COLUMN_ID_NAME,
       dataSourceColumns,
-      reduceOptions
+      reduceOptions,
     );
 
     return status("No Content");
@@ -69,8 +74,8 @@ app.post(
   {
     params: notionDataSourceIdSchema,
     body: updateDataSourceFiisPropertiesSchema,
-    headers: updateDataSourceFiisPropertiesHeadersSchema
-  }
+    headers: updateDataSourceFiisPropertiesHeadersSchema,
+  },
 );
 
 export default app;

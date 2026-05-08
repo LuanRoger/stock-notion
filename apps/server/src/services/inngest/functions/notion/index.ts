@@ -1,15 +1,18 @@
 import { DEFAULT_NOTION_COLUMN_ID_NAME } from "@/constants";
 import { inngest } from "@/services/inngest";
 import { createNotionClient } from "@/services/notion";
-import { updateDataSourceFiisPageProperties } from "@/use-casses/notion";
-import type { NotionReducePropertiesOptions, UpdateNotionDataSourceFiMessage } from "@repo/shared/models";
+import { updateDataSourceFiisPageProperties } from "@/modules/notion/use-cases";
+import type {
+  NotionReducePropertiesOptions,
+  UpdateNotionDataSourceFiMessage,
+} from "@repo/shared/models";
 
 export const updateNotionDataSourceFii = inngest.createFunction(
   { id: "update-notion-data-source-fii", triggers: [{ event: "notion/fii" }] },
   async ({ event, step, logger }) => {
     const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
-      logger.warn("Notion integration secret not available")
+      logger.warn("Notion integration secret not available");
       return;
     }
 
@@ -17,7 +20,9 @@ export const updateNotionDataSourceFii = inngest.createFunction(
     const { dataSourceId, rowIdColumnName, timeZone, ...dataSourceColumns } =
       event.data as UpdateNotionDataSourceFiMessage;
     const dataSourcePropertiesName =
-      Object.keys(dataSourceColumns).length !== 0 ? dataSourceColumns : undefined;
+      Object.keys(dataSourceColumns).length !== 0
+        ? dataSourceColumns
+        : undefined;
     const reduceOptions: NotionReducePropertiesOptions = { timeZone };
 
     await step.run("updateDataSourceFiisPageProperties", async () => {
@@ -26,8 +31,8 @@ export const updateNotionDataSourceFii = inngest.createFunction(
         dataSourceId,
         rowIdColumnName ?? DEFAULT_NOTION_COLUMN_ID_NAME,
         dataSourcePropertiesName,
-        reduceOptions
+        reduceOptions,
       );
-    })
+    });
   },
 );
