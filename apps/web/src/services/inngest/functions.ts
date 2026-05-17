@@ -7,15 +7,14 @@ import {
 import { inngest } from "./client";
 import { updateDataSourceFiisPropertiesSchema } from "./schemas";
 import {
+  FiiData,
   NotionReducePropertiesOptions,
   Properties,
   PropertiesOptions,
 } from "@/models/notion";
 import { mergePropertiesNameOption } from "@/utils/object";
 import { lower } from "@/utils/string";
-import { getFiiById } from "@/app/actions/fii";
 import { fiiDataToPageProperty } from "@/utils/properties";
-import { getFiagroById } from "@/app/actions/fii";
 
 export const processTask = inngest.createFunction(
   { id: "process-task", triggers: { event: "app/task.created" } },
@@ -35,11 +34,20 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
     id: "update-notion-data-source-fiis-page-properties",
     triggers: { event: "app/data-source.update" },
   },
-  async ({ event, step, logger }) => {
+  async ({ event, step }) => {
     const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
+    const baseUrl = process.env.FII_API_URL;
+    const apiKey = process.env.FII_API_KEY;
     if (!notionSecret) {
       throw new EnvVariableNotSetError("NOTION_INTEGRATION_SECRET");
     }
+    if (!baseUrl) {
+      throw new EnvVariableNotSetError("FII_API_URL");
+    }
+    if (!apiKey) {
+      throw new EnvVariableNotSetError("FII_API_KEY");
+    }
+
     const { success, data, error } =
       await updateDataSourceFiisPropertiesSchema.safeParseAsync(event.data);
 
@@ -67,20 +75,24 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
       },
     );
 
-    const properties: Properties = await step.run(
-      "create-properties",
-      async () => {
-        const properties: Properties = {};
-        for (const fii of fiis) {
-          const fiiId = lower(fii);
-          const fiiData = await getFiiById(fiiId);
-          properties[fiiId] = fiiDataToPageProperty(
-            fiiData,
-            dataSourcePropertiesName,
-          );
-        }
-        return properties;
-      },
+    const properties: Properties = {};
+    await Promise.all(
+      fiis.map(async (fii) => {
+        const fiiId = lower(fii);
+        const url = `${baseUrl}/fiis/${fiiId}`;
+
+        const response = await step.fetch(url, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
+
+        const data: FiiData = await response.json();
+        properties[fiiId] = fiiDataToPageProperty(
+          data,
+          dataSourcePropertiesName,
+        );
+      }),
     );
 
     const propertiesOptions: PropertiesOptions = {
