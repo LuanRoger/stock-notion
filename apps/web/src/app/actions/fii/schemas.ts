@@ -9,13 +9,13 @@ export interface FiiData {
       value: number;
       percentage: number;
       basePrice: number;
-      date: Date;
+      date: string;
     };
     nextYield?: {
       value: number;
       percentage: number;
       basePrice: number;
-      date: Date;
+      date: string;
     };
   };
 }

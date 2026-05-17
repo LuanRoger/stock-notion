@@ -1,12 +1,12 @@
-import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants";
-import type { PageProperty } from "@/models/properties-options";
 import type { NotionReducePropertiesOptions } from "@repo/shared/models";
-import type { NotionPageOrDataSource } from "@/types";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { PageProperty } from "@/models/notion";
+import { NotionPageOrDataSource } from "@/types/notion";
+import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants/notion";
 
 export function isValidPage(
   page: NotionPageOrDataSource,
-  rowIdColumnName: string
+  rowIdColumnName: string,
 ): page is PageObjectResponse {
   if (page.object !== "page") {
     return false;
@@ -23,7 +23,7 @@ export function isValidPage(
 
 export function reduceProperties(
   properties: PageProperty[],
-  options?: NotionReducePropertiesOptions
+  options?: NotionReducePropertiesOptions,
 ) {
   const { timeZone = DEFAULT_NOTION_DATE_TIMEZONE } = options ?? {};
 
@@ -53,13 +53,13 @@ export function reduceProperties(
       }
       return acc;
     },
-    {} as Record<string, any>
+    {} as Record<string, any>,
   );
 }
 
 export function createFilterByRowId(
   rowIdColumnName: string,
-  rowIds: string[] | Record<string, PageProperty[]>
+  rowIds: string[] | Record<string, PageProperty[]>,
 ) {
   const sanitizedRowIds = Array.isArray(rowIds) ? rowIds : Object.keys(rowIds);
   const pagesIdFilter = sanitizedRowIds.map((rowId) => ({

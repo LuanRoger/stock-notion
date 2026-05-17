@@ -35,7 +35,7 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
     id: "update-notion-data-source-fiis-page-properties",
     triggers: { event: "app/data-source.update" },
   },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const notionSecret = process.env.NOTION_INTEGRATION_SECRET;
     if (!notionSecret) {
       throw new EnvVariableNotSetError("NOTION_INTEGRATION_SECRET");
@@ -52,13 +52,20 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
     const { timeZone } = headers ?? {};
     const reduceOptions: NotionReducePropertiesOptions = { timeZone };
 
-    const fiis = await getDataSourceRowIds(
-      client,
-      dataSourceId,
-      rowIdColumnName,
+    const { fiis, dataSourcePropertiesName } = await step.run(
+      "get-fiis-in-notion",
+      async () => {
+        const fiis = await getDataSourceRowIds(
+          client,
+          dataSourceId,
+          rowIdColumnName,
+        );
+        const dataSourcePropertiesName =
+          mergePropertiesNameOption(dataSourceColumns);
+
+        return { fiis, dataSourcePropertiesName };
+      },
     );
-    const dataSourcePropertiesName =
-      mergePropertiesNameOption(dataSourceColumns);
 
     const properties: Properties = await step.run(
       "create-properties",
@@ -66,19 +73,11 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
         const properties: Properties = {};
         for (const fii of fiis) {
           const fiiId = lower(fii);
-          try {
-            const fiiData = await getFiiById(fiiId);
-            properties[fiiId] = fiiDataToPageProperty(
-              fiiData,
-              dataSourcePropertiesName,
-            );
-          } catch (error) {
-            const fiagro = await getFiagroById(fiiId);
-            properties[fiiId] = fiiDataToPageProperty(
-              fiagro,
-              dataSourcePropertiesName,
-            );
-          }
+          const fiiData = await getFiiById(fiiId);
+          properties[fiiId] = fiiDataToPageProperty(
+            fiiData,
+            dataSourcePropertiesName,
+          );
         }
         return properties;
       },

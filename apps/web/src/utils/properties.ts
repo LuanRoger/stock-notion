@@ -60,7 +60,7 @@ export function fiiDataToPageProperty(
     properties.push({
       name: lastYieldDate,
       type: "date",
-      value: value.yield.lastYield.date.toISOString(),
+      value: value.yield.lastYield.date,
     });
   }
   if (nextYieldValue && value.yield.nextYield?.value) {
@@ -88,7 +88,7 @@ export function fiiDataToPageProperty(
     properties.push({
       name: nextYieldDate,
       type: "date",
-      value: value.yield.nextYield.date.toISOString(),
+      value: value.yield.nextYield.date,
     });
   }
 

@@ -19,10 +19,10 @@ import { cn } from "@/utils/tailwind";
 import DataSourceIdInfoIcon from "./data-source-id-info-icon";
 import { useState } from "react";
 import LoadingButton from "./loading-button";
-import { sendStockMessage } from "@/app/actions/channel";
 import { showErrorToast, showToast } from "@/utils/toast";
 import { appendToLocalStorageArray } from "@/utils/local-storage";
 import { DATA_SOURCE_HISTORY_KEY } from "@/constants/local-storage";
+import { triggerNotionDataSourceUpdate } from "@/app/actions/notion";
 
 interface NotionDataSourceFormProps {
   className?: string;
@@ -40,15 +40,15 @@ export default function NotionDataSourceForm({
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(data: NotionDataSource) {
+    const { dataSourceId } = data;
+
     try {
       setIsLoading(true);
-      const actionResult = await sendStockMessage(data);
-      if (actionResult.success) {
-        appendToLocalStorageArray(DATA_SOURCE_HISTORY_KEY, data.dataSourceId);
-        showToast("Atualização requisitada com sucesso");
-      } else {
-        showErrorToast("Um erro ocorreu", actionResult.error);
-      }
+
+      await triggerNotionDataSourceUpdate(dataSourceId);
+
+      appendToLocalStorageArray(DATA_SOURCE_HISTORY_KEY, data.dataSourceId);
+      showToast("Atualização requisitada com sucesso");
 
       form.reset();
     } catch (error) {

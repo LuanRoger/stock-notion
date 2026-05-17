@@ -1,6 +1,9 @@
 import { PropertiesNameOption } from "@/models/notion";
+import { TimeZone } from "@/types/time";
 
 export const DEFAULT_NOTION_COLUMN_ID_NAME = "Nome do FII";
+
+export const DEFAULT_NOTION_DATE_TIMEZONE: TimeZone = "America/Sao_Paulo";
 
 export const DEFAULT_PAGE_PROPERTIES_NAME: PropertiesNameOption = {
   actualValue: "Valor Atual",
