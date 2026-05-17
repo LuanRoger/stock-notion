@@ -26,3 +26,7 @@ export const updateDataSourceFiisPropertiesSchema = z.object({
     })
     .optional(),
 });
+
+export const notionUpdateStatusSchema = z.object({
+  step: z.enum(["creating-client", "fetching-data", "updating-notion", "done"]),
+});

@@ -15,6 +15,7 @@ import {
 import { mergePropertiesNameOption } from "@/utils/object";
 import { lower } from "@/utils/string";
 import { fiiDataToPageProperty } from "@/utils/properties";
+import { notionUpdateStatusPipeline } from "./channels";
 
 export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
   {
@@ -42,11 +43,15 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
       throw new Error(error.message);
     }
 
-    const client = createNotionClient(notionSecret);
     const { dataSourceId, dataSourceColumns, rowIdColumnName, headers } = data;
+    const channel = notionUpdateStatusPipeline;
     const { timeZone } = headers ?? {};
     const reduceOptions: NotionReducePropertiesOptions = { timeZone };
 
+    await step.realtime.publish("create-client", channel.status, {
+      step: "creating-client",
+    });
+    const client = createNotionClient(notionSecret);
     const { fiis, dataSourcePropertiesName } = await step.run(
       "get-fiis-in-notion",
       async () => {
@@ -62,6 +67,9 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
       },
     );
 
+    await step.realtime.publish("fetching-data", channel.status, {
+      step: "fetching-data",
+    });
     const properties: Properties = {};
     await Promise.all(
       fiis.map(async (fii) => {
@@ -87,6 +95,9 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
       properties,
     };
 
+    await step.realtime.publish("updating-notion", channel.status, {
+      step: "updating-notion",
+    });
     await step.run("update-data-source-page-properties", async () => {
       await updateDataSourcePageProperties(
         client,
@@ -94,6 +105,10 @@ export const updateNotionDataSourceFiisPageProperties = inngest.createFunction(
         propertiesOptions,
         reduceOptions,
       );
+    });
+
+    await step.realtime.publish("done", channel.status, {
+      step: "done",
     });
   },
 );
