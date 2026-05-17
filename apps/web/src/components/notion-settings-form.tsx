@@ -16,7 +16,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { NOTION_SETTINGS_DEFAULT_VALUES } from "@/constants";
 import { getLocalStorage, setLocalStorage } from "@/utils/local-storage";
 import { NOTION_FIELDS_MAPPING_KEY } from "@/constants/local-storage";
 import { showToast } from "@/utils/toast";
@@ -24,13 +23,14 @@ import {
   mergeWithDefaults,
   setUndefinedForEmptyStrings,
 } from "@repo/shared/utils";
+import { NOTION_SETTINGS_DEFAULT_VALUES } from "@/constants";
 
 export default function NotionSettingsForm() {
   const form = useForm<NotionSettings>({
     resolver: zodResolver(notionSettingsSchema),
     defaultValues: mergeWithDefaults(
       getLocalStorage(NOTION_FIELDS_MAPPING_KEY),
-      NOTION_SETTINGS_DEFAULT_VALUES
+      NOTION_SETTINGS_DEFAULT_VALUES,
     ),
   });
 
