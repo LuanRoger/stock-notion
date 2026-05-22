@@ -1,5 +1,4 @@
-import { FiiData } from "@/app/actions/fii/schemas";
-import { PropertiesNameOption, PageProperty } from "@/models/notion";
+import { PropertiesNameOption, PageProperty, FiiData } from "@/models/notion";
 
 export function fiiDataToPageProperty(
   value: FiiData,

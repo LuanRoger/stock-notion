@@ -19,16 +19,13 @@ import { Button } from "./ui/button";
 import { getLocalStorage, setLocalStorage } from "@/utils/local-storage";
 import { NOTION_FIELDS_MAPPING_KEY } from "@/constants/local-storage";
 import { showToast } from "@/utils/toast";
-import {
-  mergeWithDefaults,
-  setUndefinedForEmptyStrings,
-} from "@repo/shared/utils";
+import { mergeWithDefaults, setUndefinedForEmptyStrings } from "@/utils/object";
 import { NOTION_SETTINGS_DEFAULT_VALUES } from "@/constants";
 
 export default function NotionSettingsForm() {
   const form = useForm<NotionSettings>({
     resolver: zodResolver(notionSettingsSchema),
-    defaultValues: mergeWithDefaults(
+    defaultValues: mergeWithDefaults<NotionSettings>(
       getLocalStorage(NOTION_FIELDS_MAPPING_KEY),
       NOTION_SETTINGS_DEFAULT_VALUES,
     ),
