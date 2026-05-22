@@ -1,6 +1,5 @@
-import type { NotionReducePropertiesOptions } from "@repo/shared/models";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { PageProperty } from "@/models/notion";
+import { NotionReducePropertiesOptions, PageProperty } from "@/models/notion";
 import { NotionPageOrDataSource } from "@/types/notion";
 import { DEFAULT_NOTION_DATE_TIMEZONE } from "@/constants/notion";
 
